@@ -9,7 +9,8 @@
 #include <Ultrasonic.h> // Declaração de biblioteca
 #include <Thread.h>
 #include <ThreadController.h>
-#include <iostream>
+#include <Servo.h>
+
 
 #define IN1 D0
 #define IN2 D1
@@ -48,24 +49,31 @@ const char* update_password = "admin";
 #define MSG_BUFFER_SIZE  (50)
 char msg[MSG_BUFFER_SIZE];
 unsigned long lastMsg = 0;
-int pwm = 0;
+
+int pwmA = 0, pwmB = 0;
 int distance = 0;
+
 String moveStr_Pub;
+
+int pos = 0;
+boolean right = true;
 
 //FLAGS de Controlo
 bool OTA = false; //O Serviço OTA é muito pesado para estar sempre ativo por isso é ligado via MQTT e fica disponivel até ser desligado ou até o device ser reiniciado
 bool OTABegin = false;
 
+
 ESP8266WebServer httpServer(80);
 ESP8266HTTPUpdateServer httpUpdater;
-
 WiFiClient wclient;
 PubSubClient client(MQTT_SERVER, 1883, wclient);
-
 Ultrasonic ultrasonic(TRIGGER, ECHO); // Instância chamada ultrasonic com parâmetros (trig,echo)
+WiFiManager wifiManager;
+Servo ultrasonicServo; 
 ThreadController cpu;
 Thread detectObstacles_Thread;
-WiFiManager wifiManager;
+Thread moveServo_Thread;
+
 
 void setup() {
   Serial.begin(9600); // Inicio da comunicação serial
@@ -76,14 +84,17 @@ void setup() {
   pinMode(IN4,OUTPUT);
   pinMode(ENA,OUTPUT);
   pinMode(ENB,OUTPUT);
-  pinMode(SERVO,OUTPUT);
+  ultrasonicServo.attach(D8);
 
   //Configuração da Thread de verificação do estado do dispositivo
   detectObstacles_Thread.setInterval(200);
   detectObstacles_Thread.onRun(detectObstacles);
+  moveServo_Thread.setInterval(150);
+  moveServo_Thread.onRun(moveServo);
 
   //Configuração do ThreadController
   cpu.add(&detectObstacles_Thread);
+  cpu.add(&moveServo_Thread);
 
   //wifiManager.resetSettings(); //Limpa a configuração anterior do Wi-Fi SSID e Password, procedimento, 1º descomentar a linha, 2º Fazer Upload do código para o ESP e deixar o ESP arrancar, 3º Voltar a comentar a linha e enviar novamente o código para o ESP
   /*define o tempo limite até o portal de configuração ficar novamente inátivo,

@@ -51,25 +51,27 @@ void payloadInterpreter ( String payloadStr ) {
   }
   String moveStr = root["move"];
   moveStr_Pub = moveStr;
-  pwm = root["pwm"];
-
+  pwmA = root["pwma"];
+  pwmB = root["pwmb"];
   Serial.print("moveStr=");
   Serial.println(moveStr);
 
-  Serial.print("pwm=");
-  Serial.println(pwm);
-
+  Serial.print("pwmA=");
+  Serial.println(pwmA);
+  Serial.print("pwmB=");
+  Serial.println(pwmB);
+  
   if( moveStr == "forward" ){
-    moveForward(pwm);
+    moveForward(pwmA,pwmB);
   }
   else if( moveStr == "backward" ){
-    moveBackward(pwm);
+    moveBackward(pwmA,pwmB);
   }
   else if( moveStr == "left" ){
-    moveLeft(pwm);
+    moveLeft(pwmA,pwmB);;
   }
   else if( moveStr == "right" ){
-    moveRight(pwm);
+    moveRight(pwmA,pwmB);
   }
   else if( moveStr == "break" ){
     moveBreak();

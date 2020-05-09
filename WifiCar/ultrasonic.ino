@@ -6,3 +6,11 @@ void detectObstacles (){
  distance = ultrasonic.distanceRead();
   
 }
+
+void moveServo (){
+  if(pos > 179 ) pos=0;
+  else pos+=5;
+  Serial.print("pos=");
+  Serial.println(pos);
+  ultrasonicServo.write(pos);
+}

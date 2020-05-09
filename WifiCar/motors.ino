@@ -1,7 +1,20 @@
-void moveForward (int pwm){ 
-  analogWrite(ENA,pwm);
-  analogWrite(ENB,pwm);
+
+// max pwmA = 255 max pwmB = 170
+void moveForward (int pwmA, int pwmB){ 
+  analogWrite(ENA,pwmA);
+  analogWrite(ENB,pwmB);
   
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,HIGH);
+  digitalWrite(IN3,LOW);
+  digitalWrite(IN4,HIGH);
+  
+}
+
+void moveBackward (int pwmA, int pwmB){ 
+  analogWrite(ENA,pwmA);
+  analogWrite(ENB,pwmB);
+
   digitalWrite(IN1,HIGH);
   digitalWrite(IN2,LOW);
   digitalWrite(IN3,HIGH);
@@ -9,19 +22,9 @@ void moveForward (int pwm){
   
 }
 
-void moveBackward (int pwm){
-  analogWrite(ENA,pwm);
-  analogWrite(ENB,pwm);
-  
-  digitalWrite(IN1,LOW);
-  digitalWrite(IN2,HIGH);
-  digitalWrite(IN3,LOW);
-  digitalWrite(IN4,HIGH);
-}
-
-void moveRight (int pwm){
-  analogWrite(ENA,pwm);
-  analogWrite(ENB,pwm);
+void moveRight (int pwmA, int pwmB){ 
+  analogWrite(ENA,pwmA);
+  analogWrite(ENB,pwmB);
   
   digitalWrite(IN1,HIGH);
   digitalWrite(IN2,LOW);
@@ -29,9 +32,9 @@ void moveRight (int pwm){
   digitalWrite(IN4,HIGH);
 }
 
-void moveLeft (int pwm){
-  analogWrite(ENA,pwm);
-  analogWrite(ENB,pwm);
+void moveLeft (int pwmA, int pwmB){ 
+  analogWrite(ENA,pwmA);
+  analogWrite(ENB,pwmB);
   
   digitalWrite(IN1,LOW);
   digitalWrite(IN2,HIGH);
@@ -50,8 +53,8 @@ void moveBreak (){
 }
 
 void moveNeutral (){
-  analogWrite(ENA,0);
-  analogWrite(ENB,0);
+  analogWrite(ENA,255);
+  analogWrite(ENB,255);
   
   digitalWrite(IN1,LOW);
   digitalWrite(IN2,LOW);
