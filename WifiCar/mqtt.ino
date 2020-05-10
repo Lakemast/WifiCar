@@ -1,5 +1,5 @@
 void setupOTA() {
-  
+
   MDNS.begin(host);
 
   httpUpdater.setup(&httpServer, update_path, update_username, update_password);
@@ -42,10 +42,9 @@ void callback(char *topic, byte *payload, unsigned int length) {
 
 
 void payloadInterpreter ( String payloadStr ) {
-  
   StaticJsonBuffer<200> jsonBuffer;
   JsonObject& root = jsonBuffer.parseObject(payloadStr);
-  if(!root.success()) {
+  if (!root.success()) {
     Serial.println("parseObject() failed");
     return;
   }
@@ -60,38 +59,36 @@ void payloadInterpreter ( String payloadStr ) {
   Serial.println(pwmA);
   Serial.print("pwmB=");
   Serial.println(pwmB);
-  
-  if( moveStr == "forward" ){
-    moveForward(pwmA,pwmB);
+
+  if ( moveStr == "forward" ) {
+    moveForward(pwmA, pwmB);
   }
-  else if( moveStr == "backward" ){
-    moveBackward(pwmA,pwmB);
+  else if ( moveStr == "backward" ) {
+    moveBackward(pwmA, pwmB);
   }
-  else if( moveStr == "left" ){
-    moveLeft(pwmA,pwmB);;
+  else if ( moveStr == "left" ) {
+    moveLeft(pwmA, pwmB);;
   }
-  else if( moveStr == "right" ){
-    moveRight(pwmA,pwmB);
+  else if ( moveStr == "right" ) {
+    moveRight(pwmA, pwmB);
   }
-  else if( moveStr == "break" ){
+  else if ( moveStr == "break" ) {
     moveBreak();
   }
-  else if( moveStr == "neutral" ){
+  else if ( moveStr == "neutral" ) {
     moveNeutral();
   }
-  
+
   return;
 }
 
-void messageJSON(){
-  
+void messageJSON() {
   StaticJsonBuffer<300> JSONbuffer;
   JsonObject& JSONencoder = JSONbuffer.createObject();
-  JSONencoder["device"] = HOSTNAME;
+  JSONencoder["obstacle"] = obstacleDetected;
   JSONencoder["distance"] = distance;
   JSONencoder.printTo(msg, sizeof(msg));
   //Serial.println(msg);
-  
 }
 
 

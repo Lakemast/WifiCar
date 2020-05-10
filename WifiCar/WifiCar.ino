@@ -21,6 +21,7 @@
 #define ENA D6
 #define ENB D7
 #define SERVO D8
+#define MIN_DISTANCE 25
 
 // Configuração do acesso ao Broker MQTT
 #define MQTT_AUTH false
@@ -70,7 +71,7 @@ WiFiClient wclient;
 PubSubClient client(MQTT_SERVER, 1883, wclient);
 Ultrasonic ultrasonic(TRIGGER, ECHO); // Instância chamada ultrasonic com parâmetros (trig,echo)
 WiFiManager wifiManager;
-Servo ultrasonicServo; 
+Servo ultrasonicServo;
 ThreadController cpu;
 Thread detectObstacles_Thread;
 Thread moveServo_Thread;
@@ -78,13 +79,13 @@ Thread moveServo_Thread;
 
 void setup() {
   Serial.begin(9600); // Inicio da comunicação serial
-  
-  pinMode(IN1,OUTPUT);
-  pinMode(IN2,OUTPUT);
-  pinMode(IN3,OUTPUT);
-  pinMode(IN4,OUTPUT);
-  pinMode(ENA,OUTPUT);
-  pinMode(ENB,OUTPUT);
+
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
   ultrasonicServo.attach(D8);
 
   //Configuração da Thread de verificação do estado do dispositivo
@@ -107,9 +108,9 @@ void setup() {
 }
 
 void loop() {
-  
+
   cpu.run();
-    if (WiFi.status() == WL_CONNECTED) {
+  if (WiFi.status() == WL_CONNECTED) {
     if (checkMqttConnection()) {
       client.loop();
       if (OTA) {
@@ -132,5 +133,5 @@ void loop() {
       client.publish(MQTT_PUBLISHER_TOPIC, msg);
     }
   }
-  
+
 }
