@@ -52,8 +52,9 @@ unsigned long lastMsg = 0;
 
 int pwmA = 0, pwmB = 0;
 int distance = 0;
+int obstacle_right = 0, obstacle_left = 0, obstacles_scan = 0;;
 
-String moveStr_Pub;
+String moveStr_Pub, obstacleDetected;
 
 int pos = 0;
 boolean right = true;
@@ -87,9 +88,9 @@ void setup() {
   ultrasonicServo.attach(D8);
 
   //Configuração da Thread de verificação do estado do dispositivo
-  detectObstacles_Thread.setInterval(200);
+  detectObstacles_Thread.setInterval(50);
   detectObstacles_Thread.onRun(detectObstacles);
-  moveServo_Thread.setInterval(150);
+  moveServo_Thread.setInterval(57);
   moveServo_Thread.onRun(moveServo);
 
   //Configuração do ThreadController
@@ -126,8 +127,8 @@ void loop() {
       //++value;
       messageJSON();
       //snprintf (msg, MSG_BUFFER_SIZE, "hello world #%ld", value);
-      Serial.print("Publish message: ");
-      Serial.println(msg);
+      //Serial.print("Publish message: ");
+      //Serial.println(msg);
       client.publish(MQTT_PUBLISHER_TOPIC, msg);
     }
   }
