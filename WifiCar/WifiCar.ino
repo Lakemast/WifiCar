@@ -47,7 +47,7 @@ const char* update_username = "admin";
 const char* update_password = "admin";
 
 //Variáveis da mensagem do publisher.
-#define MSG_BUFFER_SIZE  (50)
+#define MSG_BUFFER_SIZE  (100)
 char msg[MSG_BUFFER_SIZE];
 unsigned long lastMsg = 0;
 

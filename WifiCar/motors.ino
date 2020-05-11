@@ -9,7 +9,6 @@ void moveForward (int pwmA, int pwmB) {
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
-
 }
 
 void moveBackward (int pwmA, int pwmB) {
@@ -20,7 +19,6 @@ void moveBackward (int pwmA, int pwmB) {
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-
 }
 
 void moveRight (int pwmA, int pwmB) {

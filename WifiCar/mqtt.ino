@@ -1,12 +1,16 @@
 void setupOTA() {
-
   MDNS.begin(host);
-
   httpUpdater.setup(&httpServer, update_path, update_username, update_password);
   httpServer.begin();
-
   MDNS.addService("http", "tcp", 80);
-  Serial.printf("HTTPUpdateServer ready! Open http://%s.local%s in your browser and login with username '%s' and password '%s'\n", host, update_path, update_username, update_password);
+  
+  /*Serial.print("HTTPUpdateServer ready! Open http://");
+  Serial.print(WiFi.localIP().toString());
+  Serial.print(update_path);
+  Serial.print(" in your browser and login with username: ");
+  Serial.print(update_username);
+  Serial.print("  and password: ");
+  Serial.println(update_password);*/
 }
 
 //Chamada de recepção de mensagem
@@ -60,25 +64,12 @@ void payloadInterpreter ( String payloadStr ) {
   Serial.print("pwmB=");
   Serial.println(pwmB);
 
-  if ( moveStr == "forward" ) {
-    moveForward(pwmA, pwmB);
-  }
-  else if ( moveStr == "backward" ) {
-    moveBackward(pwmA, pwmB);
-  }
-  else if ( moveStr == "left" ) {
-    moveLeft(pwmA, pwmB);;
-  }
-  else if ( moveStr == "right" ) {
-    moveRight(pwmA, pwmB);
-  }
-  else if ( moveStr == "break" ) {
-    moveBreak();
-  }
-  else if ( moveStr == "neutral" ) {
-    moveNeutral();
-  }
-
+  if ( moveStr == "forward" ) moveForward(pwmA, pwmB);
+  else if ( moveStr == "backward" ) moveBackward(pwmA, pwmB);
+  else if ( moveStr == "left" ) moveLeft(pwmA, pwmB);
+  else if ( moveStr == "right" ) moveRight(pwmA, pwmB);
+  else if ( moveStr == "break" ) moveBreak();
+  else if ( moveStr == "neutral" ) moveNeutral();
   return;
 }
 
@@ -87,6 +78,7 @@ void messageJSON() {
   JsonObject& JSONencoder = JSONbuffer.createObject();
   JSONencoder["obstacle"] = obstacleDetected;
   JSONencoder["distance"] = distance;
+  JSONencoder["voltage"] = checkBatteryVoltage ();
   JSONencoder.printTo(msg, sizeof(msg));
   //Serial.println(msg);
 }
@@ -103,4 +95,11 @@ bool checkMqttConnection() {
     }
   }
   return client.connected();
+}
+
+float checkBatteryVoltage (){
+  float batteryVoltage = 0;
+  batteryVoltage = analogRead(A0);
+  batteryVoltage = round((batteryVoltage/325)*7.64*100)/100;
+  return batteryVoltage;
 }
