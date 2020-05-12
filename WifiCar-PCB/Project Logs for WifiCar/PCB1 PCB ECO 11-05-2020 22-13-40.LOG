@@ -1,0 +1,35 @@
+Added Component: Designator=CON1(KRE3-3vias)
+Added Pin To Net: NetName=VIN Pin=CON1-1
+Added Pin To Net: NetName=GND_3 Pin=CON1-2
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=RSV_1 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=RSV_1 Pin=NodeMCU-1-RSV
+Change Net Name : Old Net Name=D0 New Net Name=IN1
+Change Net Name : Old Net Name=D1 New Net Name=IN2
+Change Net Name : Old Net Name=D2 New Net Name=IN3
+Change Net Name : Old Net Name=D3 New Net Name=IN4
+Change Net Name : Old Net Name=D4 New Net Name=TRIG
+Change Net Name : Old Net Name=D5 New Net Name=ECHO
+Change Net Name : Old Net Name=D6 New Net Name=ENA
+Change Net Name : Old Net Name=D7 New Net Name=ENB
+Change Net Name : Old Net Name=D8 New Net Name=SERVO
+Added Pin To Net: NetName=VU Pin=CON1-3
+Added Net: Name=VU
+Added Member To Class: ClassName=Sheet1 Member=Component CON1 KRE3vias

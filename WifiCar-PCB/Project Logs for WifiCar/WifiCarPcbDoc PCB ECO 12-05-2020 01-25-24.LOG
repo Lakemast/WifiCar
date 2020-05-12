@@ -1,0 +1,23 @@
+Change Component Footprint: Designator=C2 Old Footprint=CAPACITOR ELETROLITICO 5x11x2.54mm New Footprint=CAPACITOR ELETROLITICO 4x5x1.6mm
+Change Component Footprint: Designator=C3 Old Footprint=CAPACITOR ELETROLITICO 5x11x2.54mm New Footprint=CAPACITOR ELETROLITICO 4x5x1.6mm
+Change Component Footprint: Designator=HC-SR1 Old Footprint=PCBComponent_1 - duplicate New Footprint=HDR1X4
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=RSV_1 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=RSV_1 Pin=NodeMCU-1-RSV

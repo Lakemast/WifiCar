@@ -1,0 +1,19 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: WifiCarPcbDoc.PcbDoc   12/05/2020  14:14:23
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : WifiCarPcbDoc.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      30mil (0.762mm)                                           Round             4         PTH        1.66inch (42.17mm)
+T2      33mil (0.85mm)                                            Round             10        PTH        3.86inch (98.08mm)
+T3      35mil (0.889mm)                                           Round             30        PTH        3.70inch (93.98mm)
+T4      35mil (0.9mm)                                             Round             43        PTH        7.35inch (186.58mm)
+T5      47mil (1.2mm)                                             Round             3         PTH        0.40inch (10.16mm)
+T6      115mil (2.921mm)                                          Round             4         NPTH       4.26inch (108.20mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              94
+
+Total Processing Time (hh:mm:ss) : 00:00:00

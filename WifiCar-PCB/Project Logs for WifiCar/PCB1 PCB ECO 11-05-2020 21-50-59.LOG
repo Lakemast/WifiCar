@@ -1,0 +1,115 @@
+Added Component: Designator=NodeMCU-1(NodeMCU V1.0 ESP-12E)
+Added Component: Designator=P1(HDR1X15)
+Added Component: Designator=P2(HDR1X15)
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=P1-6
+Added Net: Name=3V3_1
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=P1-15
+Added Net: Name=3V3_2
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=P2-11
+Added Net: Name=3V3_3
+Added Pin To Net: NetName=A0 Pin=NodeMCU-1-A0
+Added Pin To Net: NetName=A0 Pin=P2-1
+Added Net: Name=A0
+Added Pin To Net: NetName=CLK Pin=NodeMCU-1-CLK
+Added Pin To Net: NetName=CLK Pin=P2-9
+Added Net: Name=CLK
+Added Pin To Net: NetName=CMD Pin=NodeMCU-1-CMD
+Added Pin To Net: NetName=CMD Pin=P2-7
+Added Net: Name=CMD
+Added Pin To Net: NetName=D0 Pin=NodeMCU-1-D0
+Added Pin To Net: NetName=D0 Pin=P1-1
+Added Net: Name=D0
+Added Pin To Net: NetName=D1 Pin=NodeMCU-1-D1
+Added Pin To Net: NetName=D1 Pin=P1-2
+Added Net: Name=D1
+Added Pin To Net: NetName=D2 Pin=NodeMCU-1-D2
+Added Pin To Net: NetName=D2 Pin=P1-3
+Added Net: Name=D2
+Added Pin To Net: NetName=D3 Pin=NodeMCU-1-D3
+Added Pin To Net: NetName=D3 Pin=P1-4
+Added Net: Name=D3
+Added Pin To Net: NetName=D4 Pin=NodeMCU-1-D4
+Added Pin To Net: NetName=D4 Pin=P1-5
+Added Net: Name=D4
+Added Pin To Net: NetName=D5 Pin=NodeMCU-1-D5
+Added Pin To Net: NetName=D5 Pin=P1-8
+Added Net: Name=D5
+Added Pin To Net: NetName=D6 Pin=NodeMCU-1-D6
+Added Pin To Net: NetName=D6 Pin=P1-9
+Added Net: Name=D6
+Added Pin To Net: NetName=D7 Pin=NodeMCU-1-D7
+Added Pin To Net: NetName=D7 Pin=P1-10
+Added Net: Name=D7
+Added Pin To Net: NetName=D8 Pin=NodeMCU-1-D8
+Added Pin To Net: NetName=D8 Pin=P1-11
+Added Net: Name=D8
+Added Pin To Net: NetName=EN Pin=NodeMCU-1-EN
+Added Pin To Net: NetName=EN Pin=P2-12
+Added Net: Name=EN
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=P1-7
+Added Net: Name=GND_1
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=P1-14
+Added Net: Name=GND_2
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=P2-10
+Added Net: Name=GND_3
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=P2-14
+Added Net: Name=GND_4
+Added Pin To Net: NetName=RST Pin=NodeMCU-1-RST
+Added Pin To Net: NetName=RST Pin=P2-13
+Added Net: Name=RST
+Added Pin To Net: NetName=RSV_1 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=RSV_1 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=RSV_1 Pin=P2-2
+Added Net: Name=RSV_1
+Added Pin To Net: NetName=RSV_2 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=RSV_2 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=RSV_2 Pin=P2-3
+Added Net: Name=RSV_2
+Added Pin To Net: NetName=RX Pin=NodeMCU-1-RX
+Added Pin To Net: NetName=RX Pin=P1-12
+Added Net: Name=RX
+Added Pin To Net: NetName=SD0 Pin=NodeMCU-1-SD0
+Added Pin To Net: NetName=SD0 Pin=P2-8
+Added Net: Name=SD0
+Added Pin To Net: NetName=SD1 Pin=NodeMCU-1-SD1
+Added Pin To Net: NetName=SD1 Pin=P2-6
+Added Net: Name=SD1
+Added Pin To Net: NetName=SD2 Pin=NodeMCU-1-SD2
+Added Pin To Net: NetName=SD2 Pin=P2-5
+Added Net: Name=SD2
+Added Pin To Net: NetName=SD3 Pin=NodeMCU-1-SD3
+Added Pin To Net: NetName=SD3 Pin=P2-4
+Added Net: Name=SD3
+Added Pin To Net: NetName=TX Pin=NodeMCU-1-TX
+Added Pin To Net: NetName=TX Pin=P1-13
+Added Net: Name=TX
+Added Pin To Net: NetName=VIN Pin=NodeMCU-1-VIN
+Added Pin To Net: NetName=VIN Pin=P2-15
+Added Net: Name=VIN
+Added Class: Name=Sheet1
+Added Room: Name=Sheet1

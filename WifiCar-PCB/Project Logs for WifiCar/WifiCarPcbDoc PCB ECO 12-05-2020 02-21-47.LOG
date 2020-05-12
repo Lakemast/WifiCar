@@ -1,0 +1,29 @@
+Removed Member From Class: ClassName=WiFiCar Member=HC-SR1
+Added Component: Designator=UT1(HC-SR04)
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=RSV_2 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=RSV_2 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=VU Pin=SERVO-VCC
+Added Pin To Net: NetName=NetHC-SR1_7 Pin=UT1-ECHO
+Added Pin To Net: NetName=GND_4 Pin=UT1-GND
+Added Pin To Net: NetName=TRIG Pin=UT1-TRIG
+Added Pin To Net: NetName=VCC Pin=UT1-VCC
+Change Net Name : Old Net Name=NetHC-SR1_7 New Net Name=NetR1_2
+Added Member To Class: ClassName=WiFiCar Member=Component UT1 Ultrasonic Sensor

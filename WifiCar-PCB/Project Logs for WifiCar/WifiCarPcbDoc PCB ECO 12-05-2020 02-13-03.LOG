@@ -1,0 +1,5 @@
+Change Component Footprint: Designator=SERVO Old Footprint=PCBComponent_1 New Footprint=SERVO
+Added Component: Designator=HC-SR1(HC-SR04)
+Added Pin To Net: NetName=GND_4 Pin=SERVO-GND
+Added Pin To Net: NetName=SERVO Pin=SERVO-SIGNAL
+Added Member To Class: ClassName=WiFiCar Member=Component HC-SR1 Ultrasonic Sensor

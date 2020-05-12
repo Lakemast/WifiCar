@@ -1,0 +1,4 @@
+Removed Member From Class: ClassName=WiFiCar Member=HC-SR1
+Added Component: Designator=HC-SR?(HDR1X4)
+Change Net Name : Old Net Name=NetHC-SR1_7 New Net Name=NetHC-SR?_7
+Added Member To Class: ClassName=WiFiCar Member=Component HC-SR? Ultrasonic Sensor

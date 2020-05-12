@@ -1,0 +1,29 @@
+Removed Pin From Net: NetName=VU Pin=CON1-1
+Removed Pin From Net: NetName=GND_4 Pin=CON1-2
+Removed Pin From Net: NetName=VCC Pin=CON1-3
+Removed Member From Class: ClassName=WiFiCar Member=CON1
+Added Component: Designator=CON?(KRE3-3vias)
+Added Pin To Net: NetName=VU Pin=CON?-1
+Added Pin To Net: NetName=GND_4 Pin=CON?-2
+Added Pin To Net: NetName=VCC Pin=CON?-3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=RSV_2 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=RSV_2 Pin=NodeMCU-1-RSV
+Added Member To Class: ClassName=WiFiCar Member=Component CON? KRE3vias

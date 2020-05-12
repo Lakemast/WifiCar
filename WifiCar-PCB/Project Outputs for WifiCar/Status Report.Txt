@@ -1,0 +1,13 @@
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : Project [WifiCar.PrjPcb]
+   Generated File[WifiCarPcbDoc_Copper_Signal_Bot.gbr]
+   Generated File[WifiCarPcbDoc.RUL]
+   Generated File[WifiCarPcbDoc.EXTREP]
+   Generated File[WifiCarPcbDoc.REP]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 18:18:39 On 12/05/2020

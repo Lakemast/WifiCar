@@ -1,0 +1,42 @@
+Removed Pin From Net: NetName=GND_3 Pin=CON1-2
+Removed Member From Class: ClassName=WiFiCar Member=HC-SR04
+Added Component: Designator=HC-SR1(HDR1X4)
+Added Component: Designator=R1(AXIAL-0.4)
+Added Component: Designator=R2(AXIAL-0.4)
+Added Component: Designator=R?(AXIAL-0.4)
+Added Component: Designator=REG1(TO-220)
+Added Pin To Net: NetName=GND_4 Pin=CON1-2
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=RSV_1 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=RSV_1 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=ECHO Pin=R1-1
+Added Pin To Net: NetName=GND Pin=R1-2
+Added Pin To Net: NetName=GND_4 Pin=R2-1
+Added Pin To Net: NetName=ECHO Pin=R2-2
+Added Pin To Net: NetName=VIN Pin=REG1-1
+Added Pin To Net: NetName=GND_4 Pin=REG1-2
+Added Pin To Net: NetName=VIN Pin=REG1-3
+Change Net Name : Old Net Name=GND New Net Name=NetHC-SR1_7
+Change Net Name : Old Net Name=VIN New Net Name=VCC
+Added Member To Class: ClassName=WiFiCar Member=Component HC-SR1 Ultrasonic Sensor
+Added Member To Class: ClassName=WiFiCar Member=Component R1 Res2
+Added Member To Class: ClassName=WiFiCar Member=Component R2 Res2
+Added Member To Class: ClassName=WiFiCar Member=Component R? Res2
+Added Member To Class: ClassName=WiFiCar Member=Component REG1 LM7805

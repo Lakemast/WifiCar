@@ -1,0 +1,21 @@
+Change Component Footprint: Designator=HC-SR1 Old Footprint=HDR1X4 New Footprint=PCBComponent_1 - duplicate
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=RSV_2 Pin=NodeMCU-1-RSV
+Added Pin To Net: NetName=RSV_2 Pin=NodeMCU-1-RSV

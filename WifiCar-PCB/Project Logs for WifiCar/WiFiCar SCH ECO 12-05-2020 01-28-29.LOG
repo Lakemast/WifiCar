@@ -1,0 +1,7 @@
+Remove Pin=NodeMCU-1-3V3 From Net=3V3_1
+Remove Pin=NodeMCU-1-3V3 From Net=3V3_3
+Remove Pin=NodeMCU-1-GND From Net=GND_1
+Remove Pin=NodeMCU-1-GND From Net=GND_2
+Remove Pin=NodeMCU-1-GND From Net=GND_4
+Remove Pin=NodeMCU-1-RSV From Net=RSV_2
+Remove Pin=SERVO-13 From Net=VU

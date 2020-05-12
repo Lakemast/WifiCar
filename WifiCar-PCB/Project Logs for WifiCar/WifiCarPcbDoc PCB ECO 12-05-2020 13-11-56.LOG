@@ -1,0 +1,19 @@
+Removed Pin From Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_4 Pin=P1-7
+Removed Pin From Net: NetName=GND_4 Pin=P2-14
+Change Component Designator: OldDesignator=LED NewDesignator=LE1
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_1 Pin=P1-7
+Added Pin To Net: NetName=GND_5 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_5 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_5 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_5 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_5 Pin=P2-14
+Added Net: Name=GND_5
+Added Member To Class: ClassName=WiFiCar Member=Component LE1 LED PTH
