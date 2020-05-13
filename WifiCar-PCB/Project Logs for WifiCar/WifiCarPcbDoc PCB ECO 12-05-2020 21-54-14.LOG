@@ -1,0 +1,5 @@
+Added Component: Designator=R2(AXIAL-0.4)
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND_3
+Added Pin To Net: NetName=GND_4 Pin=R2-1
+Added Pin To Net: NetName=ECHO Pin=R2-2
+Added Member To Class: ClassName=WiFiCar Member=Component R2 Res2

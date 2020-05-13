@@ -1,0 +1,23 @@
+Removed Pin From Net: NetName=GND_4 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_5 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_2 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_1 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_4 Pin=P2-14
+Removed Pin From Net: NetName=A0 Pin=R4-20
+Change Component Designator: OldDesignator=7805 NewDesignator=REG1
+Added Component: Designator=SERVO(SERVO)
+Added Component: Designator=ULTR1(HC-SR4)
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND_5 Pin=P2-14
+Added Pin To Net: NetName=GND_4 Pin=SERVO-GND
+Added Pin To Net: NetName=SERVO Pin=SERVO-SIGNAL
+Added Pin To Net: NetName=VU Pin=SERVO-VCC
+Added Pin To Net: NetName=NetR1_2 Pin=ULTR1-ECHO
+Added Pin To Net: NetName=GND_4 Pin=ULTR1-GND
+Added Pin To Net: NetName=TRIG Pin=ULTR1-TRIG
+Added Pin To Net: NetName=VCC Pin=ULTR1-VCC
+Added Member To Class: ClassName=WiFiCar Member=Component SERVO
+Added Member To Class: ClassName=WiFiCar Member=Component ULTR1 Ultrasonic Sensor

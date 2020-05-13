@@ -1,0 +1,10 @@
+Replace Part NodeMCU-1 NodeMCU V1.0 ESP-12E in D:\GitHub\WifiCar\WifiCar-PCB\WiFiCar.SchDoc with NodeMCU V1.0 ESP-12E from WifiCar.SCHLIB
+Replace Part P1 Header 15 in D:\GitHub\WifiCar\WifiCar-PCB\WiFiCar.SchDoc with Header 15 from Miscellaneous Connectors.IntLib
+Replace Part P2 Header 15 in D:\GitHub\WifiCar\WifiCar-PCB\WiFiCar.SchDoc with Header 15 from Miscellaneous Connectors.IntLib
+Replace Part R1 Res2 in D:\GitHub\WifiCar\WifiCar-PCB\WiFiCar.SchDoc with Res2 from Miscellaneous Devices.IntLib
+Replace Part R2 Res2 in D:\GitHub\WifiCar\WifiCar-PCB\WiFiCar.SchDoc with Res2 from Miscellaneous Devices.IntLib
+Replace Part R3 Res2 in D:\GitHub\WifiCar\WifiCar-PCB\WiFiCar.SchDoc with Res2 from Miscellaneous Devices.IntLib
+Replace Part R4 Res2 in D:\GitHub\WifiCar\WifiCar-PCB\WiFiCar.SchDoc with Res2 from Miscellaneous Devices.IntLib
+Replace Part R5 Res2 in D:\GitHub\WifiCar\WifiCar-PCB\WiFiCar.SchDoc with Res2 from Miscellaneous Devices.IntLib
+Replace Part SERVO SERVO in D:\GitHub\WifiCar\WifiCar-PCB\WiFiCar.SchDoc with SERVO from WifiCar.SCHLIB
+Replace Part ULTR1 HC-SR04 in D:\GitHub\WifiCar\WifiCar-PCB\WiFiCar.SchDoc with HC-SR04 from WifiCar.SCHLIB

@@ -1,0 +1,12 @@
+Removed Pin From Net: NetName=3V3_3 Pin=NodeMCU-1-3V3
+Removed Pin From Net: NetName=3V3_2 Pin=NodeMCU-1-3V3
+Removed Pin From Net: NetName=3V3_1 Pin=NodeMCU-1-3V3
+Removed Pin From Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=GND_3 Pin=NodeMCU-1-GND
+Removed Pin From Net: NetName=RSV_1 Pin=NodeMCU-1-RSV
+Removed Pin From Net: NetName=RSV_2 Pin=NodeMCU-1-RSV
+Change Component Designator: OldDesignator=C2 NewDesignator=C1
+Change Component Designator: OldDesignator=C3 NewDesignator=C2
+Change Component Library : Designator=NodeMCU-1 Old Library=nodemcu.IntLib New Library=WifiCar.SCHLIB

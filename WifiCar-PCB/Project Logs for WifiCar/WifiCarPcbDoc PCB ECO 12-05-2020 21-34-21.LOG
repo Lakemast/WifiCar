@@ -1,0 +1,10 @@
+Change Component Footprint: Designator=NodeMCU-1 Old Footprint=NodeMCU V1.0 ESP-12E New Footprint=NodeMCU
+Added Pin To Net: NetName=3V3_1 Pin=NodeMCU-1-3V3_1
+Added Pin To Net: NetName=3V3_2 Pin=NodeMCU-1-3V3_2
+Added Pin To Net: NetName=3V3_3 Pin=NodeMCU-1-3V3_3
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND_1
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND_2
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND_3
+Added Pin To Net: NetName=GND_5 Pin=NodeMCU-1-GND_3
+Added Pin To Net: NetName=RSV_1 Pin=NodeMCU-1-RSV_1
+Added Pin To Net: NetName=RSV_2 Pin=NodeMCU-1-RSV_2

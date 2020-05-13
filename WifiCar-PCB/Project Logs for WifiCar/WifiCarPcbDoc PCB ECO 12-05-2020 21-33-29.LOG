@@ -1,0 +1,23 @@
+Added Component: Designator=NodeMCU-1(NodeMCU V1.0 ESP-12E)
+Added Pin To Net: NetName=A0 Pin=NodeMCU-1-A0
+Added Pin To Net: NetName=CLK Pin=NodeMCU-1-CLK
+Added Pin To Net: NetName=CMD Pin=NodeMCU-1-CMD
+Added Pin To Net: NetName=IN1 Pin=NodeMCU-1-D0
+Added Pin To Net: NetName=IN2 Pin=NodeMCU-1-D1
+Added Pin To Net: NetName=IN3 Pin=NodeMCU-1-D2
+Added Pin To Net: NetName=IN4 Pin=NodeMCU-1-D3
+Added Pin To Net: NetName=TRIG Pin=NodeMCU-1-D4
+Added Pin To Net: NetName=ECHO Pin=NodeMCU-1-D5
+Added Pin To Net: NetName=ENA Pin=NodeMCU-1-D6
+Added Pin To Net: NetName=ENB Pin=NodeMCU-1-D7
+Added Pin To Net: NetName=SERVO Pin=NodeMCU-1-D8
+Added Pin To Net: NetName=EN Pin=NodeMCU-1-EN
+Added Pin To Net: NetName=RST Pin=NodeMCU-1-RST
+Added Pin To Net: NetName=RX Pin=NodeMCU-1-RX
+Added Pin To Net: NetName=SD0 Pin=NodeMCU-1-SD0
+Added Pin To Net: NetName=SD1 Pin=NodeMCU-1-SD1
+Added Pin To Net: NetName=SD2 Pin=NodeMCU-1-SD2
+Added Pin To Net: NetName=SD3 Pin=NodeMCU-1-SD3
+Added Pin To Net: NetName=TX Pin=NodeMCU-1-TX
+Added Pin To Net: NetName=VCC Pin=NodeMCU-1-VIN
+Added Member To Class: ClassName=WiFiCar Member=Component NodeMCU-1 NodeMCU V1.0 ESP-12E
