@@ -68,7 +68,7 @@ void payloadInterpreter ( String payloadStr ) {
   else if ( moveStr == "backward" ) moveBackward(pwmA, pwmB);
   else if ( moveStr == "left" ) moveLeft(pwmA, pwmB);
   else if ( moveStr == "right" ) moveRight(pwmA, pwmB);
-  else if ( moveStr == "break" ) moveBreak();
+  else if ( moveStr == "brake" ) moveBrake();
   else if ( moveStr == "neutral" ) moveNeutral();
   return;
 }
@@ -100,6 +100,7 @@ bool checkMqttConnection() {
 float checkBatteryVoltage (){
   float batteryVoltage = 0;
   batteryVoltage = analogRead(A0);
-  batteryVoltage = round((batteryVoltage/325)*7.64*100)/100;
+  Serial.println(batteryVoltage);
+  batteryVoltage = round((batteryVoltage/340)*7.722*100)/100;
   return batteryVoltage;
 }

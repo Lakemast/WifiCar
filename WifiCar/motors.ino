@@ -41,7 +41,7 @@ void moveLeft (int pwmA, int pwmB) {
   digitalWrite(IN4, LOW);
 }
 
-void moveBreak () {
+void moveBrake () {
   analogWrite(ENA, 255);
   analogWrite(ENB, 255);
 

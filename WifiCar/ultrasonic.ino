@@ -30,10 +30,10 @@ void detectObstacles () {
   //Serial.print(obstacle_right);
   //Serial.print(" obstacleLeft=");
   //Serial.println(obstacle_left);
-  if (obstacle_right > obstacle_left) obstacleDetected = "right";
-  else if (obstacle_left > obstacle_right) obstacleDetected = "left";
+  if (obstacle_right > obstacle_left) obstacleDetected = "Right";
+  else if (obstacle_left > obstacle_right) obstacleDetected = "Left";
   //else if (obstacle_left!=0 && obstacle_right!=0 && obstacle_left == obstacle_right) obstacleDetected = "front";
-  else  obstacleDetected = "none";
+  else  obstacleDetected = "None";
   // Serial.print(" obstacles_scan:");
   // Serial.println(obstacles_scan);
   avoidObstacles();
@@ -48,5 +48,5 @@ void detectObstacles () {
 }
 
 void avoidObstacles(){
-  if( obstacleDetected != "none" && moveStr_Pub == "forward" ) moveBreak ();
+  if( obstacleDetected != "none" && moveStr_Pub == "forward" ) moveBrake ();
 }

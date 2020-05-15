@@ -21,7 +21,7 @@
 #define ENA D6
 #define ENB D7
 #define SERVO D8
-#define MIN_DISTANCE 25
+#define MIN_DISTANCE 15
 
 // Configuração do acesso ao Broker MQTT
 #define MQTT_AUTH false
