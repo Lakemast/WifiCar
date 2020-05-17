@@ -123,7 +123,7 @@ void loop() {
       }
     }
     unsigned long now = millis();
-    if (now - lastMsg > 1000) {
+    if (now - lastMsg > 250) {
       lastMsg = now;
       //++value;
       messageJSON();

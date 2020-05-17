@@ -9,6 +9,7 @@ void moveForward (int pwmA, int pwmB) {
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
+
 }
 
 void moveBackward (int pwmA, int pwmB) {
@@ -42,8 +43,8 @@ void moveLeft (int pwmA, int pwmB) {
 }
 
 void moveBrake () {
-  analogWrite(ENA, 255);
-  analogWrite(ENB, 255);
+  analogWrite(ENA, 0);
+  analogWrite(ENB, 0);
 
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, HIGH);
@@ -52,8 +53,8 @@ void moveBrake () {
 }
 
 void moveNeutral () {
-  analogWrite(ENA, 255);
-  analogWrite(ENB, 255);
+  analogWrite(ENA, 0);
+  analogWrite(ENB, 0);
 
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);

@@ -100,7 +100,7 @@ bool checkMqttConnection() {
 float checkBatteryVoltage (){
   float batteryVoltage = 0;
   batteryVoltage = analogRead(A0);
-  Serial.println(batteryVoltage);
+  //Serial.println(batteryVoltage);
   batteryVoltage = round((batteryVoltage/340)*7.722*100)/100;
   return batteryVoltage;
 }

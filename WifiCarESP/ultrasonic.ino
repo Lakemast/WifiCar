@@ -48,5 +48,5 @@ void detectObstacles () {
 }
 
 void avoidObstacles(){
-  if( obstacleDetected != "none" && moveStr_Pub == "forward" ) moveBrake ();
+  if( obstacleDetected != "None" && moveStr_Pub == "forward" ) moveBrake ();
 }
