@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/backgroundapp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/host_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/broker_text"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/host_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:hint="@string/broker_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.052"
+                app:layout_constraintStart_toEndOf="@+id/host_textView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/publish_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/publish_topic_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/hint"
+                app:layout_constraintStart_toEndOf="@+id/subscribe_textView"
+                app:layout_constraintTop_toBottomOf="@+id/subscribe_editText" />
+
+            <EditText
+                android:id="@+id/subscribe_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/subscribe_topic_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/hint"
+                app:layout_constraintStart_toEndOf="@+id/publish_textView"
+                app:layout_constraintTop_toBottomOf="@+id/password_editText" />
+
+            <EditText
+                android:id="@+id/password_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/password_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/hint"
+                app:layout_constraintStart_toEndOf="@+id/password_textView"
+                app:layout_constraintTop_toBottomOf="@+id/username_editText" />
+
+            <EditText
+                android:id="@+id/username_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/username_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/hint"
+                app:layout_constraintStart_toEndOf="@+id/username_textView"
+                app:layout_constraintTop_toBottomOf="@+id/host_editText" />
+
+            <TextView
+                android:id="@+id/username_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/username_text"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/host_textView" />
+
+            <TextView
+                android:id="@+id/password_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="44dp"
+                android:text="@string/password_text"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/username_textView" />
+
+            <TextView
+                android:id="@+id/publish_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/publish_topic_text"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password_textView" />
+
+            <TextView
+                android:id="@+id/subscribe_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="36dp"
+                android:text="@string/subscribe_topic_text"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/publish_textView" />
+
+            <ImageButton
+                android:id="@+id/save_button"
+                android:layout_width="128dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="148dp"
+                android:layout_marginBottom="52dp"
+                android:background="@mipmap/savebutton"
+                android:imeOptions="actionDone"
+                android:scaleType="fitCenter"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/publish_editText" />
+
+            <TextView
+                android:id="@+id/speedMotorA_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/speed_motor_a2"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/host_editText"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/speedMotorA_editText"
+                android:layout_width="109dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:hint="100"
+                android:imeOptions="actionDone"
+                android:inputType="numberSigned"
+                android:text="100"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/hint"
+                app:layout_constraintStart_toEndOf="@+id/speedMotorA_textView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/speedMotorB_editText"
+                android:layout_width="109dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="100"
+                android:imeOptions="actionDone"
+                android:inputType="numberSigned"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/hint"
+                app:layout_constraintStart_toEndOf="@+id/speedMotorA_textView"
+                app:layout_constraintTop_toBottomOf="@+id/speedMotorA_editText"
+                tools:text="100" />
+
+            <TextView
+                android:id="@+id/speedMotorB_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="36dp"
+                android:text="@string/speed_motor_b2"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/host_editText"
+                app:layout_constraintTop_toBottomOf="@+id/speedMotorA_textView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
