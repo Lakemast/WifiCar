@@ -54,8 +54,8 @@ public class HomeFragment extends Fragment {
     private final static String PREF_BROKER = "PREF_BROKER", PREF_USERNAME = "PREF_USERNAME", PREF_PASSWORD = "PREF_PASSWORD",
             PREF_SUBSCRIBE = "PREF_SUBSCRIBE", PREF_PUBLISH = "PREF_PUBLISH",
             PREF_MAX_SPEED_MOTOR_A = "PREF_MAX_SPEED_MOTOR_A", PREF_MAX_SPEED_MOTOR_B = "PREF_MAX_SPEED_MOTOR_B";
-    private String movement = "neutral";
-    private int speedMotorA = 0, speedMotorB = 0, maxSpeedMOTOR_A = 0, maxSpeedMOTOR_B = 0;
+    private String movement = "neutral", pastMovement ="neutral";
+    private int speedMotorA = 0, speedMotorB = 0, maxSpeedMOTOR_A = 0, maxSpeedMOTOR_B = 0, pastspeedMotorA = 0, pastspeedMotorB = 0;
 
 
 
@@ -277,8 +277,8 @@ public class HomeFragment extends Fragment {
         else if (angle > 0 && angle < 70 || angle > 290 && angle < 359) movement = "right";
         else if (angle > 110 && angle <= 180 || angle > 195 && angle < 250) movement = "left";
         else if (angle == 0 || angle > 359) movement = "neutral";
-        speedMotorA = strength * 255 * maxSpeedMOTOR_A /10000;
-        speedMotorB = strength * 255 * maxSpeedMOTOR_B /10000;
+        speedMotorA = strength * 1023 * maxSpeedMOTOR_A /10000;
+        speedMotorB = strength * 1023 * maxSpeedMOTOR_B /10000;
         return;
 
     }
@@ -396,7 +396,14 @@ public class HomeFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... arg0) {
             while(pressedUp) {
-                publishTopicHandler(movementJSONCreate().toString());
+                int compare = Math.abs(speedMotorA-pastspeedMotorA);
+                if( movement != pastMovement  || compare > 30 ) {
+
+                    publishTopicHandler(movementJSONCreate().toString());
+                    pastspeedMotorA = speedMotorA;
+                    pastMovement = movement;
+
+                }
                 //Snackbar.make(view, "move=" + movement + " speedA=" + speedMotorA + " speedB=" + speedMotorB, Snackbar.LENGTH_LONG)
                         //.setAction("Action", null).show();
 
@@ -406,6 +413,11 @@ public class HomeFragment extends Fragment {
                 speedMotorA = 255;
                 speedMotorB = 255;
                 publishTopicHandler(movementJSONCreate().toString());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
             return null;

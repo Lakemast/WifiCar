@@ -57,7 +57,7 @@ public class ToolsFragment extends Fragment {
         subscribeEditText.setText(sharedPreferences.getString(PREF_SUBSCRIBE,"wificar/status"));
         publishEditText.setText(sharedPreferences.getString(PREF_PUBLISH,"wificar/control"));
         speedMotorA_EditText.setText(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_A,"100"));
-        speedMotorB_EditText.setText(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_A,"100"));
+        speedMotorB_EditText.setText(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_B,"100"));
 
 
 
