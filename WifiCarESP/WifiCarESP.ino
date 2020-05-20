@@ -109,7 +109,7 @@ void setup() {
 
 void loop() {
 
-  cpu.run();
+  //cpu.run();
   if (WiFi.status() == WL_CONNECTED) {
     if (checkMqttConnection()) {
       client.loop();

@@ -1,0 +1,11 @@
+Removed Pin From Net: NetName=GND_5 Pin=BUF1-8
+Removed Pin From Net: NetName=ENB Pin=P1-9
+Removed Pin From Net: NetName=ENA Pin=P1-10
+Added Component: Designator=P3(HDR1X2)
+Added Pin To Net: NetName=GND_3 Pin=BUF1-8
+Added Pin To Net: NetName=GND_5 Pin=NodeMCU-1-GND_3
+Added Pin To Net: NetName=D6 Pin=P1-9
+Added Pin To Net: NetName=D7 Pin=P1-10
+Added Pin To Net: NetName=ENA Pin=P3-1
+Added Pin To Net: NetName=ENB Pin=P3-2
+Added Member To Class: ClassName=WiFiCar Member=Component P3 Header 2

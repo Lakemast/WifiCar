@@ -1,0 +1,23 @@
+Removed Pin From Net: NetName=VCC Pin=C1-1
+Removed Pin From Net: NetName=VCC Pin=CON1-3
+Removed Pin From Net: NetName=ENA Pin=NodeMCU-1-D6
+Removed Pin From Net: NetName=ENB Pin=NodeMCU-1-D7
+Removed Pin From Net: NetName=GND_4 Pin=NodeMCU-1-GND_4
+Removed Pin From Net: NetName=GND_4 Pin=P2-14
+Removed Pin From Net: NetName=VCC Pin=P2-15
+Removed Pin From Net: NetName=VCC Pin=REG1-1
+Added Component: Designator=BUF1(CD4050BE)
+Added Pin To Net: NetName=VCC Pin=BUF1-1
+Added Pin To Net: NetName=GND_4 Pin=BUF1-8
+Added Pin To Net: NetName=GND_4 Pin=NodeMCU-1-GND_3
+Added Pin To Net: NetName=GND_5 Pin=P2-14
+Added Pin To Net: NetName=D6 Pin=NodeMCU-1-D6
+Added Net: Name=D6
+Added Pin To Net: NetName=D7 Pin=NodeMCU-1-D7
+Added Net: Name=D7
+Added Pin To Net: NetName=VIN Pin=C1-1
+Added Pin To Net: NetName=VIN Pin=CON1-3
+Added Pin To Net: NetName=VIN Pin=P2-15
+Added Pin To Net: NetName=VIN Pin=REG1-1
+Added Net: Name=VIN
+Added Member To Class: ClassName=WiFiCar Member=Component BUF1 CD4050BE

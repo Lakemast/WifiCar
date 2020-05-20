@@ -1,0 +1,3 @@
+Removed Pin From Net: NetName=VCC Pin=R3-1
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND_3
+Added Pin To Net: NetName=VIN Pin=R3-1

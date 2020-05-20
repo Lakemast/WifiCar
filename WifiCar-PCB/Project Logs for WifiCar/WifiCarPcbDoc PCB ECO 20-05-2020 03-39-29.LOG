@@ -1,0 +1,5 @@
+Added Pin To Net: NetName=ENA Pin=BUF1-2
+Added Pin To Net: NetName=D6 Pin=BUF1-3
+Added Pin To Net: NetName=ENB Pin=BUF1-4
+Added Pin To Net: NetName=D7 Pin=BUF1-5
+Added Pin To Net: NetName=GND_3 Pin=NodeMCU-1-GND_3

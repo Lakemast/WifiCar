@@ -1,0 +1,11 @@
+Removed Pin From Net: NetName=GND_3 Pin=NodeMCU-1-GND_1
+Removed Pin From Net: NetName=GND_3 Pin=NodeMCU-1-GND_2
+Removed Pin From Net: NetName=GND_3 Pin=P1-7
+Removed Pin From Net: NetName=GND_3 Pin=P1-14
+Added Pin To Net: NetName=VCC Pin=CON1-1
+Added Pin To Net: NetName=GND_1 Pin=NodeMCU-1-GND_1
+Added Pin To Net: NetName=GND_2 Pin=NodeMCU-1-GND_2
+Added Pin To Net: NetName=GND_5 Pin=NodeMCU-1-GND_3
+Added Pin To Net: NetName=GND_1 Pin=P1-7
+Added Pin To Net: NetName=GND_2 Pin=P1-14
+Added Pin To Net: NetName=VCC Pin=SERVO-VCC
