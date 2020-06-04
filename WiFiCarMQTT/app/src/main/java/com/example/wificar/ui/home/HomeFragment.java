@@ -48,15 +48,14 @@ public class HomeFragment extends Fragment {
     private Handler handler;
     private View view;
     private ImageButton accelerateButton, brakeButton;
-    private boolean isSubscribed = false, isRobotConnected = false, pressedUp = false,pressedUp_brake=false;
+    private boolean isSubscribed = false, isRobotConnected = false, pressedUp = false, pressedUp_brake = false;
     private SharedPreferences.Editor editor;
     private SharedPreferences sharedPreferences;
     private final static String PREF_BROKER = "PREF_BROKER", PREF_USERNAME = "PREF_USERNAME", PREF_PASSWORD = "PREF_PASSWORD",
             PREF_SUBSCRIBE = "PREF_SUBSCRIBE", PREF_PUBLISH = "PREF_PUBLISH",
             PREF_MAX_SPEED_MOTOR_A = "PREF_MAX_SPEED_MOTOR_A", PREF_MAX_SPEED_MOTOR_B = "PREF_MAX_SPEED_MOTOR_B";
-    private String movement = "neutral", pastMovement ="neutral";
+    private String movement = "neutral", pastMovement = "neutral";
     private int speedMotorA = 0, speedMotorB = 0, maxSpeedMOTOR_A = 0, maxSpeedMOTOR_B = 0, pastspeedMotorA = 0, pastspeedMotorB = 0;
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -133,14 +132,18 @@ public class HomeFragment extends Fragment {
                     if (battery_double < 0) battery_double = 0;
                     if (battery_double > 100) battery_double = 100;
                     batteryTextView.setText(battery_double + "%");
-                    if (battery_double < 35) batteryTextView.setTextColor(getResources().getColor(R.color.colorDisConnected));
-                    else batteryTextView.setTextColor(getResources().getColor(R.color.colorConnected));
+                    if (battery_double < 35)
+                        batteryTextView.setTextColor(getResources().getColor(R.color.colorDisConnected));
+                    else
+                        batteryTextView.setTextColor(getResources().getColor(R.color.colorConnected));
                     obstacleTextView.setText(recievedJSON.getString("obstacle"));
                     int distance = Integer.valueOf(recievedJSON.getString("distance"));
-                    if(distance<16) distanceTextView.setTextColor(getResources().getColor(R.color.colorDisConnected));
-                    else distanceTextView.setTextColor(getResources().getColor(R.color.colorConnected));
+                    if (distance < 16)
+                        distanceTextView.setTextColor(getResources().getColor(R.color.colorDisConnected));
+                    else
+                        distanceTextView.setTextColor(getResources().getColor(R.color.colorConnected));
                     distanceTextView.setText(recievedJSON.getString("distance") + " cm");
-                    if(!isRobotConnected) Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
+                    if (!isRobotConnected) Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     isRobotConnected = true;
                     robotStatus_TextView.setText("Connected.");
@@ -260,7 +263,7 @@ public class HomeFragment extends Fragment {
                 pahoMqttClient.publishMessage(client, publishMessage, 1, publishTopic);
                 //msg_new = "Message sent to pub topic: " + publishTopic + "\r\n";
                 //Snackbar.make(view, msg_new, Snackbar.LENGTH_LONG)
-                        //.setAction("Action", null).show();
+                //.setAction("Action", null).show();
             } catch (MqttException e) {
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
@@ -271,14 +274,41 @@ public class HomeFragment extends Fragment {
     }
 
     private void joystickInterpreter(int angle, int strength) {
-
+        speedMotorA = strength * 1023 * maxSpeedMOTOR_A / 10000;
+        speedMotorB = strength * 1023 * maxSpeedMOTOR_B / 10000;
         if (angle >= 70 && angle <= 110) movement = "forward";
         else if (angle >= 250 && angle <= 290) movement = "backward";
-        else if (angle > 0 && angle < 70 || angle > 290 && angle < 359) movement = "right";
-        else if (angle > 110 && angle <= 180 || angle > 195 && angle < 250) movement = "left";
+
+        else if (angle > 20 && angle < 70) {
+
+            movement = "forward";
+            speedMotorA = (int) ((-0.14*angle+1.28)*speedMotorA);
+            speedMotorB = (int) (0.75*speedMotorB);
+
+        }
+
+        else if (angle > 290 && angle < 339) {
+
+            movement = "backward";
+            speedMotorA = (int) ((0.0142857142*angle-3.8428571428)*speedMotorA);
+            speedMotorB = (int) (0.75*speedMotorB);
+
+        }
+        else if (angle > 110 && angle <= 160 ) {
+            movement = "forward";
+            speedMotorB = (int) ((0.014*angle-1.24)*speedMotorB);
+            speedMotorA = (int) (0.75*speedMotorA);
+
+        } else if (angle > 215 && angle < 250) {
+            movement = "backward";
+            speedMotorB = (int) ((-0.02*angle+5.3)*speedMotorB);
+            speedMotorA = (int) (0.75*speedMotorA);
+        }
+        else if ( angle > 290 && angle < 339  || angle > 0 && angle < 20 ) movement = "right";
+        else if ( angle > 160 && angle < 215 ) movement = "left";
         else if (angle == 0 || angle > 359) movement = "neutral";
-        speedMotorA = strength * 1023 * maxSpeedMOTOR_A /10000;
-        speedMotorB = strength * 1023 * maxSpeedMOTOR_B /10000;
+
+
         return;
 
     }
@@ -310,7 +340,7 @@ public class HomeFragment extends Fragment {
                         startX = event.getX();
                         startY = event.getY();
 
-                        if(pressedUp == false){
+                        if (pressedUp == false) {
                             pressedUp = true;
                             accelerateButton.setImageDrawable(getResources().getDrawable(R.mipmap.accelerateclickedbutton));
                             new ButtonAsyncTask().execute();
@@ -323,8 +353,8 @@ public class HomeFragment extends Fragment {
                         accelerateButton.setImageDrawable(getResources().getDrawable(R.mipmap.acceleratebutton));
                         if (isAClick(startX, endX, startY, endY)) {
                             //Snackbar.make(view, "Released!", Snackbar.LENGTH_LONG)
-                                   // .setAction("Action", null).show();
-                           // Log.d("Accelerate Button:", " Released!");
+                            // .setAction("Action", null).show();
+                            // Log.d("Accelerate Button:", " Released!");
                         }
                         break;
                 }
@@ -350,7 +380,7 @@ public class HomeFragment extends Fragment {
                         startX = event.getX();
                         startY = event.getY();
                         brakeButton.setImageDrawable(getResources().getDrawable(R.mipmap.brakeclikedbutton));
-                        if(pressedUp_brake == false){
+                        if (pressedUp_brake == false) {
                             pressedUp_brake = true;
                             new ButtonAsyncTask().execute();
                         }
@@ -361,8 +391,8 @@ public class HomeFragment extends Fragment {
                         pressedUp_brake = false;
                         brakeButton.setImageDrawable(getResources().getDrawable(R.mipmap.brakebutton));
                         if (isAClick(startX, endX, startY, endY)) {
-                           // Snackbar.make(view, "Released!", Snackbar.LENGTH_LONG)
-                                  //  .setAction("Action", null).show();
+                            // Snackbar.make(view, "Released!", Snackbar.LENGTH_LONG)
+                            //  .setAction("Action", null).show();
                             //Log.d("Accelerate Button:", " Released!");
                         }
                         break;
@@ -379,10 +409,11 @@ public class HomeFragment extends Fragment {
         });
 
     }
-    public JSONObject movementJSONCreate(){
+
+    public JSONObject movementJSONCreate() {
         JSONObject obj = new JSONObject();
         try {
-            obj.put("move",movement );
+            obj.put("move", movement);
             obj.put("pwma", speedMotorA);
             obj.put("pwmb", speedMotorB);
         } catch (JSONException e) {
@@ -391,13 +422,14 @@ public class HomeFragment extends Fragment {
         }
         return obj;
     }
+
     class ButtonAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            while(pressedUp) {
-                int compare = Math.abs(speedMotorA-pastspeedMotorA);
-                if( movement != pastMovement  || compare > 30 ) {
+            while (pressedUp) {
+                int compare = Math.abs(speedMotorA - pastspeedMotorA);
+                if (movement != pastMovement || compare > 30) {
 
                     publishTopicHandler(movementJSONCreate().toString());
                     pastspeedMotorA = speedMotorA;
@@ -405,7 +437,7 @@ public class HomeFragment extends Fragment {
 
                 }
                 //Snackbar.make(view, "move=" + movement + " speedA=" + speedMotorA + " speedB=" + speedMotorB, Snackbar.LENGTH_LONG)
-                        //.setAction("Action", null).show();
+                //.setAction("Action", null).show();
 
             }
             while (pressedUp_brake) {
