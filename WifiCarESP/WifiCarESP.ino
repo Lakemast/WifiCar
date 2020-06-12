@@ -10,6 +10,7 @@
 #include <Thread.h>
 #include <ThreadController.h>
 #include <Servo.h>
+#include <EEPROM.h>
 
 
 #define IN1 D0
@@ -23,6 +24,10 @@
 #define SERVO D8
 #define MIN_DISTANCE 15
 
+#define ADDR_MQTT_URL 603
+#define ADDR_PUBLISH_TOPIC 201
+#define ADDR_SUBSCRIBE_TOPIC 402
+
 // Configuração do acesso ao Broker MQTT
 #define MQTT_AUTH false
 #define MQTT_USERNAME "pacote"
@@ -35,21 +40,26 @@
 const String HOSTNAME  = "WifiCar"; //NOME DO DEVICE, este nome tambem é utilizado apra criar o Access Point para configuração
 const char * MQTT_LOG = "wificar/log"; // Topico onde o Device Publica informações relacionadas com o sistema
 const char * MQTT_SYSTEM_CONTROL_TOPIC = "wificar/set"; // Topico onde o Device subscreve para aceitar instruções de sistema
-const char * MQTT_PUBLISHER_TOPIC = "wificar/status";
-const char * MQTT_TEST_TOPIC = "wificar/control"; //Topico de exemplo onde o Device subscreve (por exemplo controlar uma lâmpada)
+char * MQTT_PUBLISHER_TOPIC = "wificar/status";
+char * MQTT_TEST_TOPIC = "wificar/control"; //Topico de exemplo onde o Device subscreve (por exemplo controlar uma lâmpada)
 
+//char * MQTT_PUBLISHER_TOPIC;
+//char * MQTT_TEST_TOPIC;
+//char* MQTT_SERVER;
 
 //MQTT BROKERS GRATUITOS PARA TESTES https://github.com/mqtt/mqtt.github.io/wiki/public_brokers
-const char* MQTT_SERVER = "test.mosquitto.org"; //IP ou DNS do Broker MQTT
+char* MQTT_SERVER = "broker.hivemq.com"; //IP ou DNS do Broker MQTT
 const char* host = "WifiCar";
 const char* update_path = "/firmware";
 const char* update_username = "admin";
 const char* update_password = "admin";
 
+
 //Variáveis da mensagem do publisher.
 #define MSG_BUFFER_SIZE  (100)
 char msg[MSG_BUFFER_SIZE];
 unsigned long lastMsg = 0;
+long lastReconnectAttempt = 0;
 
 int pwmA = 0, pwmB = 0;
 int distance = 0;
@@ -65,21 +75,25 @@ bool OTA = false; //O Serviço OTA é muito pesado para estar sempre ativo por i
 bool OTABegin = false;
 
 
-ESP8266WebServer httpServer(80);
+ESP8266WebServer httpServer(81); // Servidor do OTA.
+ESP8266WebServer server(80); // Servidor para mudar url do broker e os topicos.
 ESP8266HTTPUpdateServer httpUpdater;
 WiFiClient wclient;
-PubSubClient client(MQTT_SERVER, 1883, wclient);
+//PubSubClient client(MQTT_SERVER,1883,wclient);
+PubSubClient client;
 Ultrasonic ultrasonic(TRIGGER, ECHO); // Instância chamada ultrasonic com parâmetros (trig,echo)
 WiFiManager wifiManager;
 Servo ultrasonicServo;
 ThreadController cpu;
 Thread detectObstacles_Thread;
-Thread moveServo_Thread;
+//Thread moveServo_Thread;
+
 
 
 void setup() {
+  //clearEeprom ();
   Serial.begin(9600); // Inicio da comunicação serial
-
+  EEPROM.begin(4096);
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
@@ -88,31 +102,48 @@ void setup() {
   pinMode(ENB, OUTPUT);
   ultrasonicServo.attach(D8);
 
+  //*MQTT_SERVER =*/ 
+   readCharArrayEeprom(ADDR_PUBLISH_TOPIC);//MQTT_PUBLISHER_TOPIC =
+   readCharArrayEeprom(ADDR_SUBSCRIBE_TOPIC);//MQTT_TEST_TOPIC =
+   readCharArrayEeprom(ADDR_MQTT_URL);
+  //MQTT_SERVER = readCharArrayEeprom(ADDR_MQTT_URL);
+
+  //Serial.println(String(MQTT_SERVER));
   //Configuração da Thread de verificação do estado do dispositivo
   detectObstacles_Thread.setInterval(50);
   detectObstacles_Thread.onRun(detectObstacles);
-  moveServo_Thread.setInterval(57);
-  moveServo_Thread.onRun(moveServo);
+  //moveServo_Thread.setInterval(57);
+  //moveServo_Thread.onRun(moveServo);
 
   //Configuração do ThreadController
   cpu.add(&detectObstacles_Thread);
-  cpu.add(&moveServo_Thread);
+//  cpu.add(&moveServo_Thread);
 
   //wifiManager.resetSettings(); //Limpa a configuração anterior do Wi-Fi SSID e Password, procedimento, 1º descomentar a linha, 2º Fazer Upload do código para o ESP e deixar o ESP arrancar, 3º Voltar a comentar a linha e enviar novamente o código para o ESP
   /*define o tempo limite até o portal de configuração ficar novamente inátivo,
     útil para quando alteramos a password do AP*/
   wifiManager.setTimeout(180);
   wifiManager.autoConnect(HOSTNAME.c_str());
-  client.setCallback(callback); //Registo da função que vai responder ás mensagens vindos do MQTT
 
+  server.on("/", handleRoot);
+  server.on("/postplain/", handlePlain);
+  server.on("/postform/", handleForm);
+  server.onNotFound(handleNotFound);
+  server.begin();
+  client.setServer(MQTT_SERVER, 1883);
+  client.setClient(wclient);
+  Serial.println("HTTP server started");
+  client.setCallback(callback); //Registo da função que vai responder ás mensagens vindos do MQTT
+  
 }
 
 void loop() {
 
-  //cpu.run();
+  cpu.run();
   if (WiFi.status() == WL_CONNECTED) {
     if (checkMqttConnection()) {
       client.loop();
+      server.handleClient();
       if (OTA) {
         if (OTABegin) {
           setupOTA();
@@ -133,5 +164,4 @@ void loop() {
       client.publish(MQTT_PUBLISHER_TOPIC, msg);
     }
   }
-
 }

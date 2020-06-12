@@ -2,7 +2,7 @@ void setupOTA() {
   MDNS.begin(host);
   httpUpdater.setup(&httpServer, update_path, update_username, update_password);
   httpServer.begin();
-  MDNS.addService("http", "tcp", 80);
+  MDNS.addService("http", "tcp", 81);
   
   /*Serial.print("HTTPUpdateServer ready! Open http://");
   Serial.print(WiFi.localIP().toString());

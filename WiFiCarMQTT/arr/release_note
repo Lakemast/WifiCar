@@ -1,0 +1,33 @@
+mjpegviewer_v0.0.1.aar
+  - first version
+
+mjpegviewer_v0.0.2.aar
+  - change log message
+  - developer must stop streaming before (re) start streaming
+
+mjpegviewer_v0.0.3.aar
+  - fix boundary issue
+
+mjpegviewer_v1.0.0.aar
+  - support setting a delay after reading image error
+  
+mjpegviewer_v1.0.2.aar
+  - do not call Bitmap.recycle() if Android version is 3.0 and above.
+  - user can force library to or not to call recycle() on bitmap manually.
+  
+mjpegviewer_v1.0.4.aar
+  - simply update build tools and gradle
+
+mjpegviewer_v1.0.5.aar
+  - support extracting stream boundary from HTTP header
+  - update builtool and gradle 
+
+mjpegviewer_v1.0.6.aar
+  - fix issue #3: Trying to use a recycled bitmap exception
+
+mjpegviewer_v1.0.7.aar
+  - remove accidently added pinch-zoom branch code
+
+mjpegviewer_v1.0.8.aar
+  - use androidX
+  - update layout when change display mode

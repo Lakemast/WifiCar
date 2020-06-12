@@ -3,6 +3,8 @@ package com.example.wificar.ui.home;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import com.example.wificar.mqtt.PahoMqttClient;
 import com.example.wificar.R;
 import com.google.android.material.snackbar.Snackbar;
+import com.longdo.mjpegviewer.MjpegView;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -53,9 +58,13 @@ public class HomeFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private final static String PREF_BROKER = "PREF_BROKER", PREF_USERNAME = "PREF_USERNAME", PREF_PASSWORD = "PREF_PASSWORD",
             PREF_SUBSCRIBE = "PREF_SUBSCRIBE", PREF_PUBLISH = "PREF_PUBLISH",
-            PREF_MAX_SPEED_MOTOR_A = "PREF_MAX_SPEED_MOTOR_A", PREF_MAX_SPEED_MOTOR_B = "PREF_MAX_SPEED_MOTOR_B";
+            PREF_MAX_SPEED_MOTOR_A = "PREF_MAX_SPEED_MOTOR_A", PREF_MAX_SPEED_MOTOR_B = "PREF_MAX_SPEED_MOTOR_B",
+            PREF_CURVE_ANGLE = "PREF CURVE ANGLE", PREF_IPCAMERA_URL="PREF_IPCAMERA_URL";
     private String movement = "neutral", pastMovement = "neutral";
-    private int speedMotorA = 0, speedMotorB = 0, maxSpeedMOTOR_A = 0, maxSpeedMOTOR_B = 0, pastspeedMotorA = 0, pastspeedMotorB = 0;
+    private int speedMotorA = 0, speedMotorB = 0, maxSpeedMOTOR_A = 0, maxSpeedMOTOR_B = 0, pastspeedMotorA = 0, pastspeedMotorB = 0, moveNumber =0, pastmoveNumber = 0;
+    private double curveAngle;
+    private String video_url;
+    private MjpegView robotCam;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -70,6 +79,7 @@ public class HomeFragment extends Fragment {
         robotStatus_TextView = root.findViewById(R.id.status_textView4);
         accelerateButton = root.findViewById(R.id.accelerateButton);
         brakeButton = root.findViewById(R.id.brakeButton);
+        robotCam = root.findViewById(R.id.mjpegview);
 
         view = getActivity().findViewById(android.R.id.content);
 
@@ -82,9 +92,20 @@ public class HomeFragment extends Fragment {
         password = sharedPreferences.getString(PREF_PASSWORD, "");
         subscribeTopic = sharedPreferences.getString(PREF_SUBSCRIBE, "wificar/status");
         publishTopic = sharedPreferences.getString(PREF_PUBLISH, "wificar/control");
+        video_url = sharedPreferences.getString(PREF_IPCAMERA_URL,"http://192.168.15.102:8081");
 
         maxSpeedMOTOR_A = Integer.valueOf(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_A, "255"));
         maxSpeedMOTOR_B = Integer.valueOf(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_B, "255"));
+        curveAngle = Double.parseDouble(sharedPreferences.getString(PREF_CURVE_ANGLE,"0.4"));
+
+
+        robotCam.setAdjustHeight(true);
+        //view.setAdjustWidth(true);
+        robotCam.setMode(MjpegView.MODE_FIT_WIDTH);
+        //view.setMsecWaitAfterReadImageError(1000);
+        robotCam.setUrl(video_url);
+        robotCam.setRecycleBitmap(true);
+        robotCam.startStream();
 
         setListener();
 
@@ -100,6 +121,33 @@ public class HomeFragment extends Fragment {
 
 
         return root;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        client.unregisterResources();
+        client.close();
+        robotCam.stopStream();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        robotCam.startStream();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        robotCam.stopStream();
+    }
+
+    @Override
+    public void onStop() {
+        robotCam.stopStream();
+        super.onStop();
+
     }
 
     protected void mqttCallback() {
@@ -161,9 +209,10 @@ public class HomeFragment extends Fragment {
 
 
     private void connectToBroker() {
-        Random r = new Random();        //Unique Client ID for connection
-        int i1 = r.nextInt(5000 - 1) + 1;
-        clientid = "mqtt" + i1;
+        //Random r = new Random();        //Unique Client ID for connection
+        //int i1 = r.nextInt(5000 - 1) + 1;
+        //clientid = "mqtt" + i1;
+        clientid = "wificarcontrol";
 
         pahoMqttClient = new PahoMqttClient();
         client = pahoMqttClient.getMqttClient(getContext(),                        // Connect to MQTT Broker
@@ -276,37 +325,60 @@ public class HomeFragment extends Fragment {
     private void joystickInterpreter(int angle, int strength) {
         speedMotorA = strength * 1023 * maxSpeedMOTOR_A / 10000;
         speedMotorB = strength * 1023 * maxSpeedMOTOR_B / 10000;
-        if (angle >= 70 && angle <= 110) movement = "forward";
-        else if (angle >= 250 && angle <= 290) movement = "backward";
 
-        else if (angle > 20 && angle < 70) {
-
+        if (angle >= 60 && angle <= 120) {
             movement = "forward";
-            speedMotorA = (int) ((-0.14*angle+1.28)*speedMotorA);
-            speedMotorB = (int) (0.75*speedMotorB);
-
+            moveNumber = 1;
         }
-
-        else if (angle > 290 && angle < 339) {
-
+        else if (angle >= 240 && angle <= 300) {
             movement = "backward";
-            speedMotorA = (int) ((0.0142857142*angle-3.8428571428)*speedMotorA);
-            speedMotorB = (int) (0.75*speedMotorB);
-
+            moveNumber = 2;
         }
-        else if (angle > 110 && angle <= 160 ) {
+
+        else if (angle > 20 && angle < 60) {
+            moveNumber = 3;
             movement = "forward";
-            speedMotorB = (int) ((0.014*angle-1.24)*speedMotorB);
-            speedMotorA = (int) (0.75*speedMotorA);
+            speedMotorA = (int) (curveAngle*speedMotorA);
+            //speedMotorA = (int) ((-0.14*angle+1.28)*speedMotorA);
+            //speedMotorB = (int) (0.75*speedMotorB);
 
-        } else if (angle > 215 && angle < 250) {
-            movement = "backward";
-            speedMotorB = (int) ((-0.02*angle+5.3)*speedMotorB);
-            speedMotorA = (int) (0.75*speedMotorA);
         }
-        else if ( angle > 290 && angle < 339  || angle > 0 && angle < 20 ) movement = "right";
-        else if ( angle > 160 && angle < 215 ) movement = "left";
-        else if (angle == 0 || angle > 359) movement = "neutral";
+
+        else if (angle > 300 && angle < 339) {
+            moveNumber = 4;
+            movement = "backward";
+            speedMotorA = (int) (curveAngle*speedMotorA);
+           // speedMotorA = (int) ((0.0142857142*angle-3.8428571428)*speedMotorA);
+            // speedMotorB = (int) (0.75*speedMotorB);
+
+        }
+        else if (angle > 120 && angle <= 160 ) {
+            moveNumber = 5;
+            movement = "forward";
+            speedMotorB = (int) (curveAngle*speedMotorB);
+            //speedMotorB = (int) ((0.014*angle-1.24)*speedMotorB);
+            //speedMotorA = (int) (0.75*speedMotorA);
+
+        } else if (angle > 215 && angle < 240) {
+            moveNumber = 6;
+            movement = "backward";
+            speedMotorB = (int) (curveAngle*speedMotorB);
+           // speedMotorB = (int) ((-0.02*angle+5.3)*speedMotorB);
+            //speedMotorA = (int) (0.75*speedMotorA);
+        }
+        else if ( angle > 300 && angle < 339  || angle > 0 && angle < 20 ){
+            moveNumber = 7;
+            movement = "right";
+        }
+        else if ( angle > 160 && angle < 215 )
+        {
+            moveNumber = 8;
+            movement = "left";
+        }
+        else if (angle == 0 || angle > 359){
+            moveNumber = 9;
+            movement = "neutral";
+        }
 
 
         return;
@@ -382,6 +454,7 @@ public class HomeFragment extends Fragment {
                         brakeButton.setImageDrawable(getResources().getDrawable(R.mipmap.brakeclikedbutton));
                         if (pressedUp_brake == false) {
                             pressedUp_brake = true;
+                            moveNumber = 10;
                             new ButtonAsyncTask().execute();
                         }
                         break;
@@ -429,11 +502,14 @@ public class HomeFragment extends Fragment {
         protected Void doInBackground(Void... arg0) {
             while (pressedUp) {
                 int compare = Math.abs(speedMotorA - pastspeedMotorA);
-                if (movement != pastMovement || compare > 30) {
+                //if (movement != pastMovement || compare > 30) {
+
+                if(moveNumber != pastmoveNumber || compare > 275) {
 
                     publishTopicHandler(movementJSONCreate().toString());
                     pastspeedMotorA = speedMotorA;
-                    pastMovement = movement;
+                    //pastMovement = movement;
+                    pastmoveNumber = moveNumber;
 
                 }
                 //Snackbar.make(view, "move=" + movement + " speedA=" + speedMotorA + " speedB=" + speedMotorB, Snackbar.LENGTH_LONG)
@@ -441,14 +517,17 @@ public class HomeFragment extends Fragment {
 
             }
             while (pressedUp_brake) {
-                movement = "brake";
-                speedMotorA = 255;
-                speedMotorB = 255;
-                publishTopicHandler(movementJSONCreate().toString());
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if(moveNumber != pastmoveNumber) {
+                    movement = "brake";
+                    pastmoveNumber =  moveNumber;
+                    speedMotorA = 1023;
+                    speedMotorB = 1023;
+                    publishTopicHandler(movementJSONCreate().toString());
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 

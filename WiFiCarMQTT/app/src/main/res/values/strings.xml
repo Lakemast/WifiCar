@@ -23,7 +23,8 @@
     <string name="status_text">Disconnected</string>
     <string name="status_text2">Broker:</string>
     <string name="status_text3">Robot:</string>
-    <string name="speed_motor_a2">Speed Motor A (%):</string>
-    <string name="speed_motor_b2">Speed Motor B (%):</string>
+    <string name="speed_motor_a2">Speed Left Motor (A) (%):</string>
+    <string name="speed_motor_b2">Speed Right Motor (B) (%):</string>
+    <string name="curve_angle">Curve angle: </string>
 />
 </resources>
