@@ -24,11 +24,13 @@ public class ToolsFragment extends Fragment {
     public SharedPreferences sharedPreferences;
     public ImageButton saveButton;
     public EditText hostEditText,userNameEditText,passwordEditText,
-            subscribeEditText,publishEditText, speedMotorA_EditText, speedMotorB_EditText, curveAngle_EditText, cameraIP_EditText;
+            subscribeEditText,publishEditText, speedMotorA_EditText, speedMotorB_EditText,
+            curveAngle_EditText, cameraIP_EditText, cameraPublishTopic, cameraSubscribeTopic;
     public final static String PREF_BROKER = "PREF_BROKER", PREF_USERNAME = "PREF_USERNAME"
             , PREF_PASSWORD ="PREF_PASSWORD", PREF_SUBSCRIBE="PREF_SUBSCRIBE",PREF_PUBLISH="PREF_PUBLISH",
             PREF_MAX_SPEED_MOTOR_A="PREF_MAX_SPEED_MOTOR_A",PREF_MAX_SPEED_MOTOR_B="PREF_MAX_SPEED_MOTOR_B",
-            PREF_CURVE_ANGLE = "PREF CURVE ANGLE",PREF_IPCAMERA_URL="PREF_IPCAMERA_URL";
+            PREF_CURVE_ANGLE = "PREF CURVE ANGLE",PREF_IPCAMERA_URL="PREF_IPCAMERA_URL",
+            PREF_CAMERA_PUBLISH_TOPIC = "PREF_CAMERA_PUBLISH_TOPIC", PREF_CAMERA_SUBSCRIBE_TOPIC = "PREF_CAMERA_SUBSCRIBE_TOPIC";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,12 +41,14 @@ public class ToolsFragment extends Fragment {
         hostEditText = root.findViewById(R.id.host_editText);
         userNameEditText = root.findViewById(R.id.username_editText);
         passwordEditText = root.findViewById(R.id.password_editText);
-        subscribeEditText = root.findViewById(R.id.subscribe_editText);
-        publishEditText = root.findViewById(R.id.publish_editText);
+        subscribeEditText = root.findViewById(R.id.subscriber_editText);
+        publishEditText = root.findViewById(R.id.publisher_editText);
         speedMotorA_EditText = root.findViewById(R.id.speedMotorA_editText);
         speedMotorB_EditText = root.findViewById(R.id.speedMotorB_editText);
         curveAngle_EditText = root.findViewById(R.id.curveAngle_editText);
         cameraIP_EditText = root.findViewById(R.id.cameraIp_EditText);
+        cameraPublishTopic = root.findViewById(R.id.cameraPublishTopic_EditText);
+        cameraSubscribeTopic = root.findViewById(R.id.cameraSubscribeTopic_EditText);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         editor = sharedPreferences.edit();
@@ -58,6 +62,9 @@ public class ToolsFragment extends Fragment {
         speedMotorB_EditText.setText(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_B,"100"));
         curveAngle_EditText.setText(sharedPreferences.getString(PREF_CURVE_ANGLE,"0.4"));
         cameraIP_EditText.setText(sharedPreferences.getString(PREF_IPCAMERA_URL ,"http://192.168.15.102:8081"));
+        cameraSubscribeTopic.setText(sharedPreferences.getString(PREF_CAMERA_SUBSCRIBE_TOPIC, "wificar/cam/status"));
+        cameraPublishTopic.setText(sharedPreferences.getString(PREF_CAMERA_PUBLISH_TOPIC, "wificar/cam/control"));
+
 
 
 
@@ -76,6 +83,8 @@ public class ToolsFragment extends Fragment {
                 editor.putString(PREF_MAX_SPEED_MOTOR_B,speedMotorB_EditText.getText().toString());
                 editor.putString(PREF_CURVE_ANGLE,curveAngle_EditText.getText().toString());
                 editor.putString(PREF_IPCAMERA_URL,cameraIP_EditText.getText().toString());
+                editor.putString(PREF_CAMERA_PUBLISH_TOPIC, cameraPublishTopic.getText().toString());
+                editor.putString(PREF_CAMERA_SUBSCRIBE_TOPIC, cameraSubscribeTopic.getText().toString());
                 editor.commit();
                 Snackbar.make(getActivity().findViewById(android.R.id.content),"Configuration set saved successfully!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -94,7 +103,7 @@ public class ToolsFragment extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         startX = event.getX();
                         startY = event.getY();
-                        saveButton.setImageDrawable(getResources().getDrawable(R.mipmap.saveclickedbutton));
+                        saveButton.setImageDrawable(getResources().getDrawable(R.mipmap.savebutton_clicked));
                         break;
                     case MotionEvent.ACTION_UP:
                         float endX = event.getX();

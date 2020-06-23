@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
@@ -46,24 +47,26 @@ import io.github.controlwear.virtual.joystick.android.JoystickView;
 public class HomeFragment extends Fragment {
 
     private JoystickView joyStickView;
-    private TextView batteryTextView, obstacleTextView, distanceTextView, brokerStatus_TextView, robotStatus_TextView;
+    private TextView batteryTextView, distanceTextView, brokerStatus_TextView, robotStatus_TextView;
     private MqttAndroidClient client;
     private PahoMqttClient pahoMqttClient;
-    private String clientid = "", urlBroker = "", username = "", password = "", subscribeTopic = "", publishTopic = "", msg_new;
+    private String clientid, urlBroker, username, password, movement = "neutral",
+            subscribeTopic, publishTopic, msg_new, video_url, camSubscribeTopic, camPublishTopic;
     private Handler handler;
     private View view;
-    private ImageButton accelerateButton, brakeButton;
-    private boolean isSubscribed = false, isRobotConnected = false, pressedUp = false, pressedUp_brake = false;
+    private ImageButton accelerateButton, brakeButton, turnCamLeftButton, turnCamRightButton, centerCamButton, lightButton;
+    private boolean isSubscribed = false, isRobotConnected = false, pressedUp = false, pressedUp_brake = false,
+            pressedUp_turnCamRight = false, pressedUp_turnCamLeft = false, pressedUp_camCenter = false, light_state = false, pressedUp_light = false;
     private SharedPreferences.Editor editor;
     private SharedPreferences sharedPreferences;
     private final static String PREF_BROKER = "PREF_BROKER", PREF_USERNAME = "PREF_USERNAME", PREF_PASSWORD = "PREF_PASSWORD",
             PREF_SUBSCRIBE = "PREF_SUBSCRIBE", PREF_PUBLISH = "PREF_PUBLISH",
             PREF_MAX_SPEED_MOTOR_A = "PREF_MAX_SPEED_MOTOR_A", PREF_MAX_SPEED_MOTOR_B = "PREF_MAX_SPEED_MOTOR_B",
-            PREF_CURVE_ANGLE = "PREF CURVE ANGLE", PREF_IPCAMERA_URL="PREF_IPCAMERA_URL";
-    private String movement = "neutral", pastMovement = "neutral";
-    private int speedMotorA = 0, speedMotorB = 0, maxSpeedMOTOR_A = 0, maxSpeedMOTOR_B = 0, pastspeedMotorA = 0, pastspeedMotorB = 0, moveNumber =0, pastmoveNumber = 0;
+            PREF_CURVE_ANGLE = "PREF CURVE ANGLE", PREF_IPCAMERA_URL = "PREF_IPCAMERA_URL",
+            PREF_CAMERA_PUBLISH_TOPIC = "PREF_CAMERA_PUBLISH_TOPIC", PREF_CAMERA_SUBSCRIBE_TOPIC = "PREF_CAMERA_SUBSCRIBE_TOPIC";
+    private int speedMotorA = 0, speedMotorB = 0, maxSpeedMOTOR_A = 0, maxSpeedMOTOR_B = 0, pastspeedMotorA = 0,
+            moveNumber = 0, pastmoveNumber = 0, camPosition = 0;
     private double curveAngle;
-    private String video_url;
     private MjpegView robotCam;
 
 
@@ -73,13 +76,16 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         joyStickView = root.findViewById(R.id.joystickViewDirection);
         batteryTextView = root.findViewById(R.id.battery_textView);
-        obstacleTextView = root.findViewById(R.id.obstacle_textView);
         distanceTextView = root.findViewById(R.id.distance_textView);
         brokerStatus_TextView = root.findViewById(R.id.status_textView);
         robotStatus_TextView = root.findViewById(R.id.status_textView4);
         accelerateButton = root.findViewById(R.id.accelerateButton);
         brakeButton = root.findViewById(R.id.brakeButton);
         robotCam = root.findViewById(R.id.mjpegview);
+        turnCamLeftButton = root.findViewById(R.id.turnCamLeft_Button);
+        turnCamRightButton = root.findViewById(R.id.turnCamRight_Button);
+        centerCamButton = root.findViewById(R.id.centerCam_Button);
+        lightButton = root.findViewById(R.id.light_Button);
 
         view = getActivity().findViewById(android.R.id.content);
 
@@ -92,25 +98,21 @@ public class HomeFragment extends Fragment {
         password = sharedPreferences.getString(PREF_PASSWORD, "");
         subscribeTopic = sharedPreferences.getString(PREF_SUBSCRIBE, "wificar/status");
         publishTopic = sharedPreferences.getString(PREF_PUBLISH, "wificar/control");
-        video_url = sharedPreferences.getString(PREF_IPCAMERA_URL,"http://192.168.15.102:8081");
+        video_url = sharedPreferences.getString(PREF_IPCAMERA_URL, "http://192.168.15.102:8081");
+        camPublishTopic = sharedPreferences.getString(PREF_CAMERA_PUBLISH_TOPIC, "wificar/cam/control");
+        camSubscribeTopic = sharedPreferences.getString(PREF_CAMERA_SUBSCRIBE_TOPIC, "wificar/cam/status");
+
 
         maxSpeedMOTOR_A = Integer.valueOf(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_A, "255"));
         maxSpeedMOTOR_B = Integer.valueOf(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_B, "255"));
-        curveAngle = Double.parseDouble(sharedPreferences.getString(PREF_CURVE_ANGLE,"0.4"));
+        curveAngle = Double.parseDouble(sharedPreferences.getString(PREF_CURVE_ANGLE, "0.4"));
 
-
-        robotCam.setAdjustHeight(true);
-        //view.setAdjustWidth(true);
-        robotCam.setMode(MjpegView.MODE_FIT_WIDTH);
-        //view.setMsecWaitAfterReadImageError(1000);
-        robotCam.setUrl(video_url);
-        robotCam.setRecycleBitmap(true);
-        robotCam.startStream();
 
         setListener();
 
         connectToBroker();
-        subscribeTopicHandler();
+        subscribeTopicHandler(camSubscribeTopic);
+        subscribeTopicHandler(subscribeTopic);
 
         // Called when a subscribed message is received
 
@@ -119,6 +121,13 @@ public class HomeFragment extends Fragment {
 
         verifyConnection();
 
+        robotCam.setAdjustHeight(true);
+        robotCam.setAdjustWidth(true);
+        robotCam.setMode(MjpegView.MODE_FIT_WIDTH);
+        robotCam.setMsecWaitAfterReadImageError(1000);
+        robotCam.setUrl(video_url);
+        robotCam.setRecycleBitmap(true);
+        robotCam.startStream();
 
         return root;
     }
@@ -140,11 +149,15 @@ public class HomeFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        client.unregisterResources();
+        client.close();
         robotCam.stopStream();
     }
 
     @Override
     public void onStop() {
+        client.unregisterResources();
+        client.close();
         robotCam.stopStream();
         super.onStop();
 
@@ -156,19 +169,31 @@ public class HomeFragment extends Fragment {
             @Override
             public void connectionLost(Throwable cause) {
                 //msg("Connection lost...");
-                robotStatus_TextView.setTextColor(getResources().getColor(R.color.colorDisConnected));
+                robotStatus_TextView.setTextColor(Color.RED);
                 robotStatus_TextView.setText("Disconnected.");
-                robotStatus_TextView.setTextColor(getResources().getColor(R.color.colorDisConnected));
                 isRobotConnected = false;
             }
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
+
+                // msg_new = "Topic: " + topic + " Message: "+ message + "Cam Topic: " + camSubscribeTopic;
+                // Snackbar.make(view, msg_new, Snackbar.LENGTH_LONG)
+                // .setAction("Action", null).show();
+
+
                 if (topic.equals("mycustomtopic1")) {
                     //Add custom message handling here (if topic = "mycustomtopic1")
-                } else if (topic.equals("mycustomtopic2")) {
-                    //Add custom message handling here (if topic = "mycustomtopic2")
-                } else {
+                } else if (topic.equals(camSubscribeTopic)) {
+
+                    if (message.toString().equals("ON")) {
+                        light_state = true;
+                        //lightButton.setImageDrawable(getResources().getDrawable(R.mipmap.lightbutton_clicked));
+                    } else if (message.toString().equals("OFF")) {
+                        light_state = false;
+                        //lightButton.setImageDrawable(getResources().getDrawable(R.mipmap.lightbutton));
+                    }
+                } else if (topic.equals(subscribeTopic)) {
 
                     String msg = "Robot connected!";
 
@@ -181,21 +206,20 @@ public class HomeFragment extends Fragment {
                     if (battery_double > 100) battery_double = 100;
                     batteryTextView.setText(battery_double + "%");
                     if (battery_double < 35)
-                        batteryTextView.setTextColor(getResources().getColor(R.color.colorDisConnected));
+                        batteryTextView.setTextColor(Color.RED);
                     else
-                        batteryTextView.setTextColor(getResources().getColor(R.color.colorConnected));
-                    obstacleTextView.setText(recievedJSON.getString("obstacle"));
+                        batteryTextView.setTextColor(Color.GREEN);
                     int distance = Integer.valueOf(recievedJSON.getString("distance"));
                     if (distance < 16)
-                        distanceTextView.setTextColor(getResources().getColor(R.color.colorDisConnected));
+                        distanceTextView.setTextColor(Color.RED);
                     else
-                        distanceTextView.setTextColor(getResources().getColor(R.color.colorConnected));
+                        distanceTextView.setTextColor(Color.GREEN);
                     distanceTextView.setText(recievedJSON.getString("distance") + " cm");
                     if (!isRobotConnected) Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                     isRobotConnected = true;
                     robotStatus_TextView.setText("Connected.");
-                    robotStatus_TextView.setTextColor(getResources().getColor(R.color.colorConnected));
+                    robotStatus_TextView.setTextColor(Color.GREEN);
                 }
             }
 
@@ -209,10 +233,11 @@ public class HomeFragment extends Fragment {
 
 
     private void connectToBroker() {
-        //Random r = new Random();        //Unique Client ID for connection
-        //int i1 = r.nextInt(5000 - 1) + 1;
-        //clientid = "mqtt" + i1;
-        clientid = "wificarcontrol";
+        Random r = new Random();        //Unique Client ID for connection
+        int i1 = r.nextInt(5000 - 1) + 1;
+        clientid = "mqtt" + i1;
+        //clientid = "wificarcontrol";
+
 
         pahoMqttClient = new PahoMqttClient();
         client = pahoMqttClient.getMqttClient(getContext(),                        // Connect to MQTT Broker
@@ -221,6 +246,7 @@ public class HomeFragment extends Fragment {
                 username,
                 password
         );
+
 
         if (pahoMqttClient.mqttAndroidClient.isConnected()) {
             //Disconnect and Reconnect to  Broker
@@ -255,12 +281,13 @@ public class HomeFragment extends Fragment {
                     brokerStatus_TextView.setTextColor(Color.GREEN); //Green if connected
                     brokerStatus_TextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                     if (!isSubscribed) {
-                        subscribeTopicHandler();
+                        subscribeTopicHandler(subscribeTopic);
+                        subscribeTopicHandler(camSubscribeTopic);
                         isSubscribed = true;
                     }
                 } else {
                     msg_new = "Disconnected.";
-                    brokerStatus_TextView.setTextColor(0xFFFF0000); //Red if not connected
+                    brokerStatus_TextView.setTextColor(Color.RED); //Red if not connected
                     brokerStatus_TextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
                     robotStatus_TextView.setTextColor(Color.RED);
                     robotStatus_TextView.setText(msg_new);
@@ -274,7 +301,7 @@ public class HomeFragment extends Fragment {
         handler.postDelayed(a, 1000);
     }
 
-    private void subscribeTopicHandler() {
+    private void subscribeTopicHandler(String topic) {
         if (!pahoMqttClient.mqttAndroidClient.isConnected()) {
             msg_new = "Currently not connected to MQTT broker: Must be connected to subscribe to a topic\r\n";
             Snackbar.make(view, msg_new, Snackbar.LENGTH_LONG)
@@ -282,14 +309,14 @@ public class HomeFragment extends Fragment {
             //tvMessage.append(msg_new);
             return;
         }
-        String topic = subscribeTopic.trim();
+        //String topic = subscribeTopic.trim();
         if (!topic.isEmpty()) {
             try {
-                pahoMqttClient.subscribe(client, topic, 1);
-                msg_new = "Added subscription topic: " + subscribeTopic + "\r\n";
+                pahoMqttClient.subscribe(client, topic.trim(), 1);
+                // msg_new = "Added subscription topic: " + topic.trim() + "\r\n";
                 //tvMessage.append(msg_new);
-                Snackbar.make(view, msg_new, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                // Snackbar.make(view, msg_new, Snackbar.LENGTH_LONG)
+                //  .setAction("Action", null).show();
 
             } catch (MqttException e) {
                 e.printStackTrace();
@@ -297,7 +324,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void publishTopicHandler(String publishMessage) {
+    private void publishTopicHandler(String topic, String publishMessage) {
         //Check if connected to broker
         if (!pahoMqttClient.mqttAndroidClient.isConnected()) {
             msg_new = "Currently not connected to MQTT broker: Must be connected to publish message to a topic\r\n";
@@ -309,7 +336,7 @@ public class HomeFragment extends Fragment {
         //String msg      = etPubMsg.getText().toString().trim();
         if (!publishMessage.isEmpty()) {
             try {
-                pahoMqttClient.publishMessage(client, publishMessage, 1, publishTopic);
+                pahoMqttClient.publishMessage(client, publishMessage, 1, topic);
                 //msg_new = "Message sent to pub topic: " + publishTopic + "\r\n";
                 //Snackbar.make(view, msg_new, Snackbar.LENGTH_LONG)
                 //.setAction("Action", null).show();
@@ -329,53 +356,43 @@ public class HomeFragment extends Fragment {
         if (angle >= 60 && angle <= 120) {
             movement = "forward";
             moveNumber = 1;
-        }
-        else if (angle >= 240 && angle <= 300) {
+        } else if (angle >= 240 && angle <= 300) {
             movement = "backward";
             moveNumber = 2;
-        }
-
-        else if (angle > 20 && angle < 60) {
+        } else if (angle > 20 && angle < 60) {
             moveNumber = 3;
             movement = "forward";
-            speedMotorA = (int) (curveAngle*speedMotorA);
+            speedMotorA = (int) (curveAngle * speedMotorA);
             //speedMotorA = (int) ((-0.14*angle+1.28)*speedMotorA);
             //speedMotorB = (int) (0.75*speedMotorB);
 
-        }
-
-        else if (angle > 300 && angle < 339) {
+        } else if (angle > 300 && angle < 339) {
             moveNumber = 4;
             movement = "backward";
-            speedMotorA = (int) (curveAngle*speedMotorA);
-           // speedMotorA = (int) ((0.0142857142*angle-3.8428571428)*speedMotorA);
+            speedMotorA = (int) (curveAngle * speedMotorA);
+            // speedMotorA = (int) ((0.0142857142*angle-3.8428571428)*speedMotorA);
             // speedMotorB = (int) (0.75*speedMotorB);
 
-        }
-        else if (angle > 120 && angle <= 160 ) {
+        } else if (angle > 120 && angle <= 160) {
             moveNumber = 5;
             movement = "forward";
-            speedMotorB = (int) (curveAngle*speedMotorB);
+            speedMotorB = (int) (curveAngle * speedMotorB);
             //speedMotorB = (int) ((0.014*angle-1.24)*speedMotorB);
             //speedMotorA = (int) (0.75*speedMotorA);
 
         } else if (angle > 215 && angle < 240) {
             moveNumber = 6;
             movement = "backward";
-            speedMotorB = (int) (curveAngle*speedMotorB);
-           // speedMotorB = (int) ((-0.02*angle+5.3)*speedMotorB);
+            speedMotorB = (int) (curveAngle * speedMotorB);
+            // speedMotorB = (int) ((-0.02*angle+5.3)*speedMotorB);
             //speedMotorA = (int) (0.75*speedMotorA);
-        }
-        else if ( angle > 300 && angle < 339  || angle > 0 && angle < 20 ){
+        } else if (angle > 300 && angle < 339 || angle > 0 && angle < 20) {
             moveNumber = 7;
             movement = "right";
-        }
-        else if ( angle > 160 && angle < 215 )
-        {
+        } else if (angle > 160 && angle < 215) {
             moveNumber = 8;
             movement = "left";
-        }
-        else if (angle == 0 || angle > 359){
+        } else if (angle == 0 || angle > 359) {
             moveNumber = 9;
             movement = "neutral";
         }
@@ -399,6 +416,186 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+
+       /* lightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (light_state) {
+                    light_state = false;
+                    publishTopicHandler(camPublishTopic, "OFF");
+                    lightButton.setImageDrawable(getResources().getDrawable(R.mipmap.lightbutton));
+                } else {
+                    light_state = true;
+                    publishTopicHandler(camPublishTopic, "ON");
+                    lightButton.setImageDrawable(getResources().getDrawable(R.mipmap.lightbutton_clicked));
+                }
+            }
+        });*/
+
+       lightButton.setOnTouchListener(new View.OnTouchListener() {
+            private int CLICK_ACTION_THRESHOLD = 200;
+            private float startX;
+            private float startY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        startX = event.getX();
+                        startY = event.getY();
+                        lightButton.setImageDrawable(getResources().getDrawable(R.mipmap.lightbutton_clicked));
+                        if (pressedUp_light == false) {
+                            pressedUp_light= true;
+                            new ButtonAsyncTask().execute();
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        float endX = event.getX();
+                        float endY = event.getY();
+                        pressedUp_light = false;
+                        lightButton.setImageDrawable(getResources().getDrawable(R.mipmap.lightbutton));
+                        if (isAClick(startX, endX, startY, endY)) {
+                            // Snackbar.make(view, "Released!", Snackbar.LENGTH_LONG)
+                            //  .setAction("Action", null).show();
+                            //Log.d("Accelerate Button:", " Released!");
+                        }
+                        break;
+                }
+                v.getParent().requestDisallowInterceptTouchEvent(true); //specific to my project
+                return false; //specific to my project
+            }
+
+            private boolean isAClick(float startX, float endX, float startY, float endY) {
+                float differenceX = Math.abs(startX - endX);
+                float differenceY = Math.abs(startY - endY);
+                return !(differenceX > CLICK_ACTION_THRESHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHOLD);
+            }
+        });
+
+
+
+        turnCamRightButton.setOnTouchListener(new View.OnTouchListener() {
+            private int CLICK_ACTION_THRESHOLD = 200;
+            private float startX;
+            private float startY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        startX = event.getX();
+                        startY = event.getY();
+                        turnCamRightButton.setImageDrawable(getResources().getDrawable(R.mipmap.rightbutton_clicked));
+                        if (pressedUp_turnCamRight == false) {
+                            pressedUp_turnCamRight = true;
+                            new ButtonAsyncTask().execute();
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        float endX = event.getX();
+                        float endY = event.getY();
+                        pressedUp_turnCamRight = false;
+                        turnCamRightButton.setImageDrawable(getResources().getDrawable(R.mipmap.rightbutton));
+                        if (isAClick(startX, endX, startY, endY)) {
+                            // Snackbar.make(view, "Released!", Snackbar.LENGTH_LONG)
+                            //  .setAction("Action", null).show();
+                            //Log.d("Accelerate Button:", " Released!");
+                        }
+                        break;
+                }
+                v.getParent().requestDisallowInterceptTouchEvent(true); //specific to my project
+                return false; //specific to my project
+            }
+
+            private boolean isAClick(float startX, float endX, float startY, float endY) {
+                float differenceX = Math.abs(startX - endX);
+                float differenceY = Math.abs(startY - endY);
+                return !(differenceX > CLICK_ACTION_THRESHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHOLD);
+            }
+        });
+
+        turnCamLeftButton.setOnTouchListener(new View.OnTouchListener() {
+            private int CLICK_ACTION_THRESHOLD = 200;
+            private float startX;
+            private float startY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        startX = event.getX();
+                        startY = event.getY();
+                        turnCamLeftButton.setImageDrawable(getResources().getDrawable(R.mipmap.leftbutton_clicked));
+                        if (pressedUp_turnCamLeft == false) {
+                            pressedUp_turnCamLeft = true;
+                            new ButtonAsyncTask().execute();
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        float endX = event.getX();
+                        float endY = event.getY();
+                        pressedUp_turnCamLeft = false;
+                        turnCamLeftButton.setImageDrawable(getResources().getDrawable(R.mipmap.leftbutton));
+                        if (isAClick(startX, endX, startY, endY)) {
+                            // Snackbar.make(view, "Released!", Snackbar.LENGTH_LONG)
+                            //  .setAction("Action", null).show();
+                            //Log.d("Accelerate Button:", " Released!");
+                        }
+                        break;
+                }
+                v.getParent().requestDisallowInterceptTouchEvent(true); //specific to my project
+                return false; //specific to my project
+            }
+
+            private boolean isAClick(float startX, float endX, float startY, float endY) {
+                float differenceX = Math.abs(startX - endX);
+                float differenceY = Math.abs(startY - endY);
+                return !(differenceX > CLICK_ACTION_THRESHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHOLD);
+            }
+        });
+
+        centerCamButton.setOnTouchListener(new View.OnTouchListener() {
+            private int CLICK_ACTION_THRESHOLD = 200;
+            private float startX;
+            private float startY;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        startX = event.getX();
+                        startY = event.getY();
+                        centerCamButton.setImageDrawable(getResources().getDrawable(R.mipmap.centerbutton_clicked));
+                        if (pressedUp_camCenter == false) {
+                            pressedUp_camCenter = true;
+                            new ButtonAsyncTask().execute();
+                        }
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        float endX = event.getX();
+                        float endY = event.getY();
+                        pressedUp_camCenter = false;
+                        centerCamButton.setImageDrawable(getResources().getDrawable(R.mipmap.centerbutton));
+                        if (isAClick(startX, endX, startY, endY)) {
+                            // Snackbar.make(view, "Released!", Snackbar.LENGTH_LONG)
+                            //  .setAction("Action", null).show();
+                            //Log.d("Accelerate Button:", " Released!");
+                        }
+                        break;
+                }
+                v.getParent().requestDisallowInterceptTouchEvent(true); //specific to my project
+                return false; //specific to my project
+            }
+
+            private boolean isAClick(float startX, float endX, float startY, float endY) {
+                float differenceX = Math.abs(startX - endX);
+                float differenceY = Math.abs(startY - endY);
+                return !(differenceX > CLICK_ACTION_THRESHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHOLD);
+            }
+        });
+
+
         accelerateButton.setOnTouchListener(new View.OnTouchListener() {
 
             private int CLICK_ACTION_THRESHOLD = 200;
@@ -414,7 +611,7 @@ public class HomeFragment extends Fragment {
 
                         if (pressedUp == false) {
                             pressedUp = true;
-                            accelerateButton.setImageDrawable(getResources().getDrawable(R.mipmap.accelerateclickedbutton));
+                            accelerateButton.setImageDrawable(getResources().getDrawable(R.mipmap.acceleratebutton_clicked));
                             new ButtonAsyncTask().execute();
                         }
                         break;
@@ -451,7 +648,7 @@ public class HomeFragment extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         startX = event.getX();
                         startY = event.getY();
-                        brakeButton.setImageDrawable(getResources().getDrawable(R.mipmap.brakeclikedbutton));
+                        brakeButton.setImageDrawable(getResources().getDrawable(R.mipmap.brakebutton_clicked));
                         if (pressedUp_brake == false) {
                             pressedUp_brake = true;
                             moveNumber = 10;
@@ -503,10 +700,9 @@ public class HomeFragment extends Fragment {
             while (pressedUp) {
                 int compare = Math.abs(speedMotorA - pastspeedMotorA);
                 //if (movement != pastMovement || compare > 30) {
+                if (moveNumber != pastmoveNumber || compare > 275) {
 
-                if(moveNumber != pastmoveNumber || compare > 275) {
-
-                    publishTopicHandler(movementJSONCreate().toString());
+                    publishTopicHandler(publishTopic, movementJSONCreate().toString());
                     pastspeedMotorA = speedMotorA;
                     //pastMovement = movement;
                     pastmoveNumber = moveNumber;
@@ -517,20 +713,60 @@ public class HomeFragment extends Fragment {
 
             }
             while (pressedUp_brake) {
-                if(moveNumber != pastmoveNumber) {
-                    movement = "brake";
-                    pastmoveNumber =  moveNumber;
-                    speedMotorA = 1023;
-                    speedMotorB = 1023;
-                    publishTopicHandler(movementJSONCreate().toString());
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                movement = "brake";
+                pastmoveNumber = moveNumber;
+                speedMotorA = 1023;
+                speedMotorB = 1023;
+                publishTopicHandler(publishTopic, movementJSONCreate().toString());
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-
+            while (pressedUp_turnCamLeft) {
+                if (camPosition < 180) camPosition += 10;
+                else camPosition = 180;
+                publishTopicHandler(camPublishTopic, String.valueOf(camPosition));
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            while (pressedUp_turnCamRight) {
+                if (camPosition > 0) camPosition -= 10;
+                else camPosition = 0;
+                publishTopicHandler(camPublishTopic, String.valueOf(camPosition));
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            while (pressedUp_camCenter) {
+                camPosition = 90;
+                publishTopicHandler(camPublishTopic, String.valueOf(camPosition));
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            while(pressedUp_light) {
+                if(light_state){
+                    publishTopicHandler(camPublishTopic, "OFF");
+                    light_state = false;
+                } else{
+                    light_state = true;
+                    publishTopicHandler(camPublishTopic, "ON");
+                }
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             return null;
         }
     }

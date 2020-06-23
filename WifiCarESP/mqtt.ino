@@ -3,24 +3,27 @@ void setupOTA() {
   httpUpdater.setup(&httpServer, update_path, update_username, update_password);
   httpServer.begin();
   MDNS.addService("http", "tcp", 81);
-  
-  /*Serial.print("HTTPUpdateServer ready! Open http://");
+
+  Serial.print("HTTPUpdateServer ready! Open http://");
   Serial.print(WiFi.localIP().toString());
   Serial.print(update_path);
   Serial.print(" in your browser and login with username: ");
   Serial.print(update_username);
   Serial.print("  and password: ");
-  Serial.println(update_password);*/
+  Serial.println(update_password);
 }
 
 //Chamada de recepção de mensagem
 void callback(char *topic, byte *payload, unsigned int length) {
+
   String payloadStr = "";
   for (int i = 0; i < length; i++) {
     payloadStr += (char)payload[i];
   }
+
   String topicStr = String(topic);
-  Serial.println(topicStr);
+
+  Serial.println(payloadStr);
   if (topicStr.equals(MQTT_SYSTEM_CONTROL_TOPIC)) {
     if (payloadStr.equals("OTA_ON_" + String(HOSTNAME))) {
       Serial.println("OTA ON");
@@ -28,7 +31,8 @@ void callback(char *topic, byte *payload, unsigned int length) {
       OTABegin = true;
       payloadStr = payloadStr + "_" + WiFi.localIP().toString();
       client.publish(MQTT_LOG, payloadStr.c_str());
-    } else if (payloadStr.equals("OTA_OFF_" + String(HOSTNAME))) {
+    }
+    else if (payloadStr.equals("OTA_OFF_" + String(HOSTNAME))) {
       Serial.println("OTA OFF");
       OTA = false;
       OTABegin = false;
@@ -36,16 +40,21 @@ void callback(char *topic, byte *payload, unsigned int length) {
     } else if (payloadStr.equals("REBOOT_" + String(HOSTNAME))) {
       Serial.println("REBOOT");
       ESP.restart();
+    } else if ( payloadStr.equals("CONFIG_" + String(HOSTNAME))) {
+      Serial.println("Setting AP...");
+      wifiManager.startConfigPortal("WifiCar");
     }
   } else if (topicStr.equals(MQTT_TEST_TOPIC)) {
     //TOPICO DE TESTE
     payloadInterpreter(payloadStr);
     Serial.println(payloadStr);
   }
+  else if (topicStr.equals(MQTT_CONTROL_CAMERA_SERVO)) if (payloadStr != "ON" && payloadStr != "OFF") moveServo (payloadStr.toInt());
 }
 
 
 void payloadInterpreter ( String payloadStr ) {
+
   StaticJsonBuffer<200> jsonBuffer;
   JsonObject& root = jsonBuffer.parseObject(payloadStr);
   if (!root.success()) {
@@ -56,6 +65,7 @@ void payloadInterpreter ( String payloadStr ) {
   moveStr_Pub = moveStr;
   pwmA = root["pwma"];
   pwmB = root["pwmb"];
+
   Serial.print("moveStr=");
   Serial.println(moveStr);
 
@@ -64,16 +74,20 @@ void payloadInterpreter ( String payloadStr ) {
   Serial.print("pwmB=");
   Serial.println(pwmB);
 
+
+
   if ( moveStr == "forward" ) moveForward(pwmA, pwmB);
   else if ( moveStr == "backward" ) moveBackward(pwmA, pwmB);
   else if ( moveStr == "left" ) moveLeft(pwmA, pwmB);
   else if ( moveStr == "right" ) moveRight(pwmA, pwmB);
   else if ( moveStr == "brake" ) moveBrake();
   else if ( moveStr == "neutral" ) moveNeutral();
+
   return;
 }
 
 void messageJSON() {
+
   StaticJsonBuffer<300> JSONbuffer;
   JsonObject& JSONencoder = JSONbuffer.createObject();
   JSONencoder["obstacle"] = obstacleDetected;
@@ -81,10 +95,12 @@ void messageJSON() {
   JSONencoder["voltage"] = checkBatteryVoltage ();
   JSONencoder.printTo(msg, sizeof(msg));
   //Serial.println(msg);
+
 }
 
 
 bool checkMqttConnection() {
+
   if (!client.connected()) {
     if (MQTT_AUTH ? client.connect(HOSTNAME.c_str(), MQTT_USERNAME, MQTT_PASSWORD) : client.connect(HOSTNAME.c_str())) {
       Serial.println("CONNECTED TO MQTT BROKER " + String(MQTT_SERVER));
@@ -92,15 +108,19 @@ bool checkMqttConnection() {
       //SUBSCRIÇÃO DE TOPICOS
       client.subscribe(MQTT_SYSTEM_CONTROL_TOPIC);
       client.subscribe(MQTT_TEST_TOPIC);
+      client.subscribe(MQTT_CONTROL_CAMERA_SERVO);
     }
   }
   return client.connected();
+
 }
 
-float checkBatteryVoltage (){
+float checkBatteryVoltage () {
+
   float batteryVoltage = 0;
   batteryVoltage = analogRead(A0);
   //Serial.println(batteryVoltage);
-  batteryVoltage = round((batteryVoltage/340)*7.722*100)/100;
+  batteryVoltage = round((batteryVoltage / 340) * 7.722 * 100) / 100;
   return batteryVoltage;
+
 }
