@@ -10,4 +10,5 @@
     <color name="nav_color_selected">#008577</color>
     <color name="item_foreground">#52cc7a</color>
     <color name="background">#2b2b2b</color>
+    <color name="settings">#00e6cd</color>
 </resources>

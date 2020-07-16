@@ -23,14 +23,14 @@ public class ToolsFragment extends Fragment {
     public SharedPreferences.Editor editor;
     public SharedPreferences sharedPreferences;
     public ImageButton saveButton;
-    public EditText hostEditText,userNameEditText,passwordEditText,
-            subscribeEditText,publishEditText, speedMotorA_EditText, speedMotorB_EditText,
-            curveAngle_EditText, cameraIP_EditText, cameraPublishTopic, cameraSubscribeTopic;
-    public final static String PREF_BROKER = "PREF_BROKER", PREF_USERNAME = "PREF_USERNAME"
-            , PREF_PASSWORD ="PREF_PASSWORD", PREF_SUBSCRIBE="PREF_SUBSCRIBE",PREF_PUBLISH="PREF_PUBLISH",
+    public EditText hostEditText,userNameEditText,passwordEditText,subscribeEditText,
+            publishEditText, speedMotorA_EditText, speedMotorB_EditText,
+            cameraIP_EditText, cameraPublishTopic, cameraSubscribeTopic;
+    public final static String PREF_BROKER = "PREF_BROKER", PREF_USERNAME = "PREF_USERNAME",
+            PREF_PASSWORD ="PREF_PASSWORD", PREF_SUBSCRIBE="PREF_SUBSCRIBE",PREF_PUBLISH="PREF_PUBLISH",
             PREF_MAX_SPEED_MOTOR_A="PREF_MAX_SPEED_MOTOR_A",PREF_MAX_SPEED_MOTOR_B="PREF_MAX_SPEED_MOTOR_B",
-            PREF_CURVE_ANGLE = "PREF CURVE ANGLE",PREF_IPCAMERA_URL="PREF_IPCAMERA_URL",
-            PREF_CAMERA_PUBLISH_TOPIC = "PREF_CAMERA_PUBLISH_TOPIC", PREF_CAMERA_SUBSCRIBE_TOPIC = "PREF_CAMERA_SUBSCRIBE_TOPIC";
+            PREF_IPCAMERA_URL="PREF_IPCAMERA_URL",PREF_CAMERA_PUBLISH_TOPIC = "PREF_CAMERA_PUBLISH_TOPIC",
+            PREF_CAMERA_SUBSCRIBE_TOPIC = "PREF_CAMERA_SUBSCRIBE_TOPIC";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,7 +45,6 @@ public class ToolsFragment extends Fragment {
         publishEditText = root.findViewById(R.id.publisher_editText);
         speedMotorA_EditText = root.findViewById(R.id.speedMotorA_editText);
         speedMotorB_EditText = root.findViewById(R.id.speedMotorB_editText);
-        curveAngle_EditText = root.findViewById(R.id.curveAngle_editText);
         cameraIP_EditText = root.findViewById(R.id.cameraIp_EditText);
         cameraPublishTopic = root.findViewById(R.id.cameraPublishTopic_EditText);
         cameraSubscribeTopic = root.findViewById(R.id.cameraSubscribeTopic_EditText);
@@ -60,7 +59,6 @@ public class ToolsFragment extends Fragment {
         publishEditText.setText(sharedPreferences.getString(PREF_PUBLISH,"wificar/control"));
         speedMotorA_EditText.setText(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_A,"100"));
         speedMotorB_EditText.setText(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_B,"100"));
-        curveAngle_EditText.setText(sharedPreferences.getString(PREF_CURVE_ANGLE,"0.4"));
         cameraIP_EditText.setText(sharedPreferences.getString(PREF_IPCAMERA_URL ,"http://192.168.15.102:8081"));
         cameraSubscribeTopic.setText(sharedPreferences.getString(PREF_CAMERA_SUBSCRIBE_TOPIC, "wificar/cam/status"));
         cameraPublishTopic.setText(sharedPreferences.getString(PREF_CAMERA_PUBLISH_TOPIC, "wificar/cam/control"));
@@ -73,7 +71,6 @@ public class ToolsFragment extends Fragment {
             public void onClick(View v) {
                 if(Integer.valueOf(speedMotorA_EditText.getText().toString())>100 ) speedMotorA_EditText.setText("100");
                 if(Integer.valueOf(speedMotorB_EditText.getText().toString())>100 ) speedMotorB_EditText.setText("100");
-                if(Double.valueOf(curveAngle_EditText.getText().toString())>1) curveAngle_EditText.setText("1");
                 editor.putString(PREF_BROKER, hostEditText.getText().toString());
                 editor.putString(PREF_USERNAME,userNameEditText.getText().toString());
                 editor.putString(PREF_PASSWORD, passwordEditText.getText().toString());
@@ -81,7 +78,6 @@ public class ToolsFragment extends Fragment {
                 editor.putString(PREF_PUBLISH,publishEditText.getText().toString());
                 editor.putString(PREF_MAX_SPEED_MOTOR_A,speedMotorA_EditText.getText().toString());
                 editor.putString(PREF_MAX_SPEED_MOTOR_B,speedMotorB_EditText.getText().toString());
-                editor.putString(PREF_CURVE_ANGLE,curveAngle_EditText.getText().toString());
                 editor.putString(PREF_IPCAMERA_URL,cameraIP_EditText.getText().toString());
                 editor.putString(PREF_CAMERA_PUBLISH_TOPIC, cameraPublishTopic.getText().toString());
                 editor.putString(PREF_CAMERA_SUBSCRIBE_TOPIC, cameraSubscribeTopic.getText().toString());

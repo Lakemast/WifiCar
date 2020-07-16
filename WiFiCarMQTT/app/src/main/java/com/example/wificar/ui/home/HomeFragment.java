@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -60,13 +61,12 @@ public class HomeFragment extends Fragment {
     private SharedPreferences.Editor editor;
     private SharedPreferences sharedPreferences;
     private final static String PREF_BROKER = "PREF_BROKER", PREF_USERNAME = "PREF_USERNAME", PREF_PASSWORD = "PREF_PASSWORD",
-            PREF_SUBSCRIBE = "PREF_SUBSCRIBE", PREF_PUBLISH = "PREF_PUBLISH",
-            PREF_MAX_SPEED_MOTOR_A = "PREF_MAX_SPEED_MOTOR_A", PREF_MAX_SPEED_MOTOR_B = "PREF_MAX_SPEED_MOTOR_B",
-            PREF_CURVE_ANGLE = "PREF CURVE ANGLE", PREF_IPCAMERA_URL = "PREF_IPCAMERA_URL",
+            PREF_SUBSCRIBE = "PREF_SUBSCRIBE", PREF_PUBLISH = "PREF_PUBLISH", PREF_MAX_SPEED_MOTOR_A = "PREF_MAX_SPEED_MOTOR_A",
+            PREF_MAX_SPEED_MOTOR_B = "PREF_MAX_SPEED_MOTOR_B", PREF_IPCAMERA_URL = "PREF_IPCAMERA_URL",
             PREF_CAMERA_PUBLISH_TOPIC = "PREF_CAMERA_PUBLISH_TOPIC", PREF_CAMERA_SUBSCRIBE_TOPIC = "PREF_CAMERA_SUBSCRIBE_TOPIC";
     private int speedMotorA = 0, speedMotorB = 0, maxSpeedMOTOR_A = 0, maxSpeedMOTOR_B = 0, pastspeedMotorA = 0,
-            moveNumber = 0, pastmoveNumber = 0, camPosition = 0;
-    private double curveAngle;
+            moveNumber = 0, pastmoveNumber = 0, camPosition = 90, lastAngle = 0, lastStrength = 0;
+    private double curveAngle, lastCurveAngle = 0;
     private MjpegView robotCam;
 
 
@@ -105,7 +105,6 @@ public class HomeFragment extends Fragment {
 
         maxSpeedMOTOR_A = Integer.valueOf(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_A, "255"));
         maxSpeedMOTOR_B = Integer.valueOf(sharedPreferences.getString(PREF_MAX_SPEED_MOTOR_B, "255"));
-        curveAngle = Double.parseDouble(sharedPreferences.getString(PREF_CURVE_ANGLE, "0.4"));
 
 
         setListener();
@@ -128,6 +127,7 @@ public class HomeFragment extends Fragment {
         robotCam.setUrl(video_url);
         robotCam.setRecycleBitmap(true);
         robotCam.startStream();
+
 
         return root;
     }
@@ -303,9 +303,9 @@ public class HomeFragment extends Fragment {
 
     private void subscribeTopicHandler(String topic) {
         if (!pahoMqttClient.mqttAndroidClient.isConnected()) {
-            msg_new = "Currently not connected to MQTT broker: Must be connected to subscribe to a topic\r\n";
-            Snackbar.make(view, msg_new, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            // msg_new = "Not Connected\r\n";
+            //Snackbar.make(view, msg_new, Snackbar.LENGTH_LONG)
+            //      .setAction("Action", null).show();
             //tvMessage.append(msg_new);
             return;
         }
@@ -327,13 +327,9 @@ public class HomeFragment extends Fragment {
     private void publishTopicHandler(String topic, String publishMessage) {
         //Check if connected to broker
         if (!pahoMqttClient.mqttAndroidClient.isConnected()) {
-            msg_new = "Currently not connected to MQTT broker: Must be connected to publish message to a topic\r\n";
-            Snackbar.make(view, msg_new, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            //if disconnected...
         }
-        //Publish non-blank message
-        //String pubtopic = etPubTopic.getText().toString().trim();
-        //String msg      = etPubMsg.getText().toString().trim();
+
         if (!publishMessage.isEmpty()) {
             try {
                 pahoMqttClient.publishMessage(client, publishMessage, 1, topic);
@@ -349,57 +345,89 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void joystickInterpreter(int angle, int strength) {
+
+    private void accelerate(int angle, int strength) {
+
         speedMotorA = strength * 1023 * maxSpeedMOTOR_A / 10000;
         speedMotorB = strength * 1023 * maxSpeedMOTOR_B / 10000;
 
-        if (angle >= 60 && angle <= 120) {
+        if (angle > 70 && angle < 110) {
             movement = "forward";
             moveNumber = 1;
-        } else if (angle >= 240 && angle <= 300) {
-            movement = "backward";
+
+        } else if (angle >= 265 && angle <= 275) {
+            //Para
+            movement = "brake";
+            speedMotorB = 1023;
+            speedMotorA = 1023;
             moveNumber = 2;
-        } else if (angle > 20 && angle < 60) {
+        } else if (angle >= 0 && angle <= 70) {
+            // curva com intensidade pra direita
+            movement = "forward";
             moveNumber = 3;
-            movement = "forward";
+            curveAngle = (0.5 / 70) * angle + 0.2;
             speedMotorA = (int) (curveAngle * speedMotorA);
-            //speedMotorA = (int) ((-0.14*angle+1.28)*speedMotorA);
-            //speedMotorB = (int) (0.75*speedMotorB);
 
-        } else if (angle > 300 && angle < 339) {
+        } else if (angle >= 110 && angle <= 180) {
+            // curva com intensidade pra esquerda
+            movement = "forward";
             moveNumber = 4;
-            movement = "backward";
-            speedMotorA = (int) (curveAngle * speedMotorA);
-            // speedMotorA = (int) ((0.0142857142*angle-3.8428571428)*speedMotorA);
-            // speedMotorB = (int) (0.75*speedMotorB);
+            curveAngle = -(0.5 / 70) * angle + 1.4857;
+            speedMotorB = (int) (curveAngle * speedMotorB);
 
-        } else if (angle > 120 && angle <= 160) {
+        } else if (angle > 275 && angle < 360) {
+            // curva direita
             moveNumber = 5;
-            movement = "forward";
-            speedMotorB = (int) (curveAngle * speedMotorB);
-            //speedMotorB = (int) ((0.014*angle-1.24)*speedMotorB);
-            //speedMotorA = (int) (0.75*speedMotorA);
-
-        } else if (angle > 215 && angle < 240) {
-            moveNumber = 6;
-            movement = "backward";
-            speedMotorB = (int) (curveAngle * speedMotorB);
-            // speedMotorB = (int) ((-0.02*angle+5.3)*speedMotorB);
-            //speedMotorA = (int) (0.75*speedMotorA);
-        } else if (angle > 300 && angle < 339 || angle > 0 && angle < 20) {
-            moveNumber = 7;
             movement = "right";
-        } else if (angle > 160 && angle < 215) {
-            moveNumber = 8;
+        } else if (angle > 180 && angle < 265) {
+            //curva esquerda
+            moveNumber = 6;
             movement = "left";
-        } else if (angle == 0 || angle > 359) {
-            moveNumber = 9;
-            movement = "neutral";
         }
 
 
         return;
 
+    }
+
+    private void brake(int angle, int strength) {
+        speedMotorA = strength * 1023 * maxSpeedMOTOR_A / 10000;
+        speedMotorB = strength * 1023 * maxSpeedMOTOR_B / 10000;
+
+        if (angle > 70 && angle < 110) {
+            // Vai pra frente!
+            movement = "backward";
+            moveNumber = 7;
+        } else if (angle >= 265 && angle <= 275) {
+            //Para
+            movement = "brake";
+            moveNumber = 8;
+            speedMotorB = 1023;
+            speedMotorA = 1023;
+        } else if (angle >= 0 && angle <= 70) {
+            // curva com intensidade pra direita
+            movement = "backward";
+            moveNumber = 9;
+            curveAngle = (0.5 / 70) * angle + 0.2;
+            speedMotorB = (int) (curveAngle * speedMotorB);
+
+        } else if (angle >= 110 && angle <= 180) {
+            // curva com intensidade pra esquerda
+            movement = "backward";
+            moveNumber = 10;
+            curveAngle = -(0.5 / 70) * angle + 1.4857;
+            speedMotorA = (int) (curveAngle * speedMotorA);
+
+        } else if (angle > 275 && angle < 360) {
+            // curva direita
+            movement = "right";
+            moveNumber = 11;
+        } else if (angle > 180 && angle < 265) {
+            //curva esquerda
+            movement = "left";
+            moveNumber = 12;
+        }
+        return;
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -408,32 +436,13 @@ public class HomeFragment extends Fragment {
         joyStickView.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
             public void onMove(int angle, int strength) {
-
-                //publishTopicHandler(" Direction: Angle: " + angle + " Strength: " + strength);
-                // Log.d("Joystick Direction:", " angulo: " + angle + " força: " + strength);
-                joystickInterpreter(angle, strength);
-
+                lastAngle = angle;
+                lastStrength = strength;
             }
         });
 
 
-
-       /* lightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (light_state) {
-                    light_state = false;
-                    publishTopicHandler(camPublishTopic, "OFF");
-                    lightButton.setImageDrawable(getResources().getDrawable(R.mipmap.lightbutton));
-                } else {
-                    light_state = true;
-                    publishTopicHandler(camPublishTopic, "ON");
-                    lightButton.setImageDrawable(getResources().getDrawable(R.mipmap.lightbutton_clicked));
-                }
-            }
-        });*/
-
-       lightButton.setOnTouchListener(new View.OnTouchListener() {
+        lightButton.setOnTouchListener(new View.OnTouchListener() {
             private int CLICK_ACTION_THRESHOLD = 200;
             private float startX;
             private float startY;
@@ -446,7 +455,7 @@ public class HomeFragment extends Fragment {
                         startY = event.getY();
                         lightButton.setImageDrawable(getResources().getDrawable(R.mipmap.lightbutton_clicked));
                         if (pressedUp_light == false) {
-                            pressedUp_light= true;
+                            pressedUp_light = true;
                             new ButtonAsyncTask().execute();
                         }
                         break;
@@ -472,7 +481,6 @@ public class HomeFragment extends Fragment {
                 return !(differenceX > CLICK_ACTION_THRESHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHOLD);
             }
         });
-
 
 
         turnCamRightButton.setOnTouchListener(new View.OnTouchListener() {
@@ -651,7 +659,6 @@ public class HomeFragment extends Fragment {
                         brakeButton.setImageDrawable(getResources().getDrawable(R.mipmap.brakebutton_clicked));
                         if (pressedUp_brake == false) {
                             pressedUp_brake = true;
-                            moveNumber = 10;
                             new ButtonAsyncTask().execute();
                         }
                         break;
@@ -664,6 +671,9 @@ public class HomeFragment extends Fragment {
                             // Snackbar.make(view, "Released!", Snackbar.LENGTH_LONG)
                             //  .setAction("Action", null).show();
                             //Log.d("Accelerate Button:", " Released!");
+                            lastAngle = 0;
+                            lastStrength = 0;
+                            new ButtonAsyncTask().execute();
                         }
                         break;
                 }
@@ -697,31 +707,41 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            while (pressedUp) {
-                int compare = Math.abs(speedMotorA - pastspeedMotorA);
-                //if (movement != pastMovement || compare > 30) {
-                if (moveNumber != pastmoveNumber || compare > 275) {
+            if (pressedUp == false || pressedUp_brake == false) {
+                Log.d("Joystick Direction:", " angulo: " + lastAngle + " força: " + lastStrength
+                        + " moveNumber:" + moveNumber + " curveAngle:" + curveAngle);
+                publishTopicHandler(publishTopic, movementJSONCreate().toString());
+            }
 
+            while (pressedUp) {
+                Log.d("Joystick Direction:", " angulo: " + lastAngle + " força: " + lastStrength
+                        + " moveNumber:" + moveNumber + " curveAngle:" + curveAngle);
+                accelerate(lastAngle, lastStrength);
+                int compare = Math.abs(speedMotorA - pastspeedMotorA);
+                double compareCurve = Math.abs((curveAngle - lastCurveAngle) / curveAngle);
+                //if (movement != pastMovement || compare > 30) {
+                if (moveNumber != pastmoveNumber || compare > 275 || compareCurve > 0.3) {
                     publishTopicHandler(publishTopic, movementJSONCreate().toString());
                     pastspeedMotorA = speedMotorA;
-                    //pastMovement = movement;
+                    lastCurveAngle = curveAngle;
                     pastmoveNumber = moveNumber;
-
                 }
                 //Snackbar.make(view, "move=" + movement + " speedA=" + speedMotorA + " speedB=" + speedMotorB, Snackbar.LENGTH_LONG)
                 //.setAction("Action", null).show();
 
             }
             while (pressedUp_brake) {
-                movement = "brake";
-                pastmoveNumber = moveNumber;
-                speedMotorA = 1023;
-                speedMotorB = 1023;
-                publishTopicHandler(publishTopic, movementJSONCreate().toString());
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                Log.d("Joystick Direction:", " angulo: " + lastAngle + " força: " + lastStrength
+                        + " moveNumber:" + moveNumber + " curveAngle:" + curveAngle);
+                brake(lastAngle, lastStrength);
+                int compare = Math.abs(speedMotorA - pastspeedMotorA);
+                double compareCurve = Math.abs((curveAngle - lastCurveAngle) / curveAngle);
+                //if (movement != pastMovement || compare > 30) {
+                if (moveNumber != pastmoveNumber || compare > 275 || compareCurve > 0.3) {
+                    publishTopicHandler(publishTopic, movementJSONCreate().toString());
+                    pastspeedMotorA = speedMotorA;
+                    lastCurveAngle = curveAngle;
+                    pastmoveNumber = moveNumber;
                 }
             }
             while (pressedUp_turnCamLeft) {
@@ -753,11 +773,11 @@ public class HomeFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-            while(pressedUp_light) {
-                if(light_state){
+            while (pressedUp_light) {
+                if (light_state) {
                     publishTopicHandler(camPublishTopic, "OFF");
                     light_state = false;
-                } else{
+                } else {
                     light_state = true;
                     publishTopicHandler(camPublishTopic, "ON");
                 }

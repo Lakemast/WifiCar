@@ -139,81 +139,76 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
 
+    <com.longdo.mjpegviewer.MjpegView
+        android:id="@+id/mjpegview"
+        android:layout_width="270dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintStart_toEndOf="@+id/joystickViewDirection" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/joystickViewDirection"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/joystickViewDirection">
 
-        <com.longdo.mjpegviewer.MjpegView
-            android:id="@+id/mjpegview"
-            android:layout_width="270dp"
-            android:layout_height="250dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp" />
+        <ImageButton
+            android:id="@+id/light_Button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:background="@mipmap/lightbutton"
+            android:scaleType="fitCenter"
+            app:srcCompat="@mipmap/lightbutton" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <Space
+            android:layout_width="8dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:layout_weight="1" />
 
-            <ImageButton
-                android:id="@+id/light_Button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:background="@mipmap/lightbutton"
-                android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/lightbutton" />
+        <ImageButton
+            android:id="@+id/turnCamLeft_Button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="4dp"
+            android:background="@mipmap/leftbutton"
+            android:scaleType="fitCenter"
+            app:srcCompat="@mipmap/leftbutton" />
 
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+        <Space
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-            <ImageButton
-                android:id="@+id/turnCamLeft_Button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="4dp"
-                android:background="@mipmap/leftbutton"
-                android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/leftbutton" />
+        <ImageButton
+            android:id="@+id/centerCam_Button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:background="@mipmap/centerbutton"
+            android:scaleType="fitCenter"
+            app:srcCompat="@mipmap/centerbutton" />
 
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+        <Space
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-            <ImageButton
-                android:id="@+id/centerCam_Button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="4dp"
-                android:layout_weight="1"
-                android:background="@mipmap/centerbutton"
-                android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/centerbutton" />
+        <ImageButton
+            android:id="@+id/turnCamRight_Button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="48dp"
+            android:background="@mipmap/rightbutton"
+            android:scaleType="fitCenter"
+            app:srcCompat="@mipmap/rightbutton" />
 
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:id="@+id/turnCamRight_Button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="48dp"
-                android:background="@mipmap/rightbutton"
-                android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/rightbutton" />
-
-        </LinearLayout>
     </LinearLayout>
 
 

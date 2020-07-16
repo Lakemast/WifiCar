@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@mipmap/backgroundapp"
+        android:background="@mipmap/backgroundapp_navbar"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:itemBackground="@drawable/drawer_item_background_color"
