@@ -16,7 +16,7 @@ Take a look how it works.
 * 1x Micro Servo 9g SG90
 * 1x Ultrasonic Sensor HC-SR04
 * 1x H Brigde L298N
-* 1x 7,4V LiPo Batery
+* 1x 7,4V LiPo Battery
 * 1x Robot chassis with 2 motors
 * Resistors:
   * 1x 550 Ohms
@@ -31,6 +31,6 @@ Take a look how it works.
 ## Assembly
 This is the PCB schematic, you can assemble it on breadboard too.
 
-**Notice that H Brigde L298N is not in the schematic, but only its pins (IN1,IN2,IN3,IN4,ENA,ENB)** 
+**Notice that you must connect H Brigde pins to IN1,IN2,IN3,IN4,ENA,ENB in the schematic** 
 <img src="/WifiCar-PCB/wificar-schematic.PNG" height="75%" width="75%">
 
