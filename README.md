@@ -34,3 +34,8 @@ This is the PCB schematic, you can assemble it on breadboard too.
 **Notice that you must connect H Brigde pins to IN1,IN2,IN3,IN4,ENA,ENB in the schematic** 
 <img src="/WifiCar-PCB/wificar-schematic.PNG" height="75%" width="75%">
 
+## Android App
+(Explicar como instalar o app via Android Studio ou linkar APK)
+
+## License
+(IMPORTANTE Creative Commons - Ver qual a melhor!)
