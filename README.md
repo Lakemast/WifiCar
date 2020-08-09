@@ -29,7 +29,7 @@ Take a look how it works.
   * 1x 100 nF 25V
   
 ## Assembly
-This is the PCB schematic, you can assemble it on protoboard too.
+This is the PCB schematic, you can assemble it on breadboard too.
 
 **Notice that H Brigde L298N is not in the schematic, but only its pins (IN1,IN2,IN3,IN4,ENA,ENB)** 
 <img src="/WifiCar-PCB/wificar-schematic.PNG" height="75%" width="75%">
