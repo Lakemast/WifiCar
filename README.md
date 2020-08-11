@@ -35,11 +35,16 @@ Take a look how it works.
   * 1x 100 nF 25V
   
 ## Assembly
-This is the PCB schematic, you can assemble it on breadboard too. I designed the PCB layout on Altium and all the files are in the [WiFiCar-PCB folder](WifiCar-PCB). Here are the [PCB bottom layer and top overlay](WifiCar-PCB/WifiCar-PCB-TRANSFER) to make the your PCB (*Check out the dimensions with the components before making the PCB because pdf files may cause some distortions*)
+This is the PCB schematic, you can assemble it on breadboard too. I designed the PCB layout on Altium and all the files are in the [WiFiCar-PCB folder](WifiCar-PCB). Here are the [PCB bottom layer and top overlay](WifiCar-PCB/WifiCar-PCB-TRANSFER) to make the your PCB (*Check out the dimensions with the components before making the PCB because pdf files may cause some distortions*).
 
 <img src="/README/wificar-schematic.PNG" height="75%" width="75%">
 
-**Notice that you must connect H Brigde pins accordingly to IN1,IN2,IN3,IN4,ENA,ENB in the schematic** 
+**Notice that you must connect H Brigde pins accordingly to IN1,IN2,IN3,IN4,ENA,ENB in the schematic.**
+
+**VU must be connected to 5V output of H Brigde.**
+
+<img src="https://i.pinimg.com/564x/ae/a5/00/aea500ba31f99047ac2ef4dfd375453d.jpg" height="40%" width="40%">
+
 
 ### Uploading the code to NodeMCU
 
@@ -53,6 +58,7 @@ This is the PCB schematic, you can assemble it on breadboard too. I designed the
 ## Android App
 
 You can install the android app downloading this [WiFiCar Android App](WiFiCarMQTT/WiFiCar.apk) or do it from Android Studio. 
+
 **Remember you need to activate developer mode in your android smartphone!**
 
 ### Configuring WiFiCar APP
