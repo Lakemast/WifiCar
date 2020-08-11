@@ -20,6 +20,10 @@ Take a look how it works.
 * 1x H Brigde L298N
 * 1x 7.4V Battery (*I used a LiPo Battery, but you can also use 2x 18650 3.7V*)
 * 1x Robot chassis with 2 motors
+* 3x 0.100" (2.54 mm) Breakaway Male Header: 1×40-Pin
+* 3x  0.100" (2.54 mm) Breakaway Female Header: 1×40-Pin
+* 1x Screw terminal block 3 pins (KF301-3P)
+* 1x LED 5mm (*any color*)
 * Resistors:
   * 1x 550 Ohms
   * 1x 4K7 Ohms
@@ -31,10 +35,11 @@ Take a look how it works.
   * 1x 100 nF 25V
   
 ## Assembly
-This is the PCB schematic, you can assemble it on breadboard too.
+This is the PCB schematic, you can assemble it on breadboard too. I designed the PCB layout on Altium and all the files are in the [WiFiCar-PCB folder](WifiCar-PCB). Here are the [PCB bottom layer and top overlay](WifiCar-PCB/WifiCar-PCB-TRANSFER) to make the your PCB (*Check out the dimensions with the components before making the PCB because pdf files may cause some distortions*)
+
+<img src="/README/wificar-schematic.PNG" height="75%" width="75%">
 
 **Notice that you must connect H Brigde pins accordingly to IN1,IN2,IN3,IN4,ENA,ENB in the schematic** 
-<img src="/README/wificar-schematic.PNG" height="75%" width="75%">
 
 ### Uploading the code to NodeMCU
 
@@ -48,6 +53,7 @@ This is the PCB schematic, you can assemble it on breadboard too.
 ## Android App
 
 You can install the android app downloading this [WiFiCar Android App](WiFiCarMQTT/WiFiCar.apk) or do it from Android Studio. 
+**Remember you need to activate developer mode in your android smartphone!**
 
 ### Configuring WiFiCar APP
 
