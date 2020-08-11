@@ -24,6 +24,7 @@ Take a look how it works.
 * 3x  0.100" (2.54 mm) Breakaway Female Header: 1×40-Pin
 * 1x Screw terminal block 3 pins (KF301-3P)
 * 1x LED 5mm (*any color*)
+* Some Female x Male Jumpers
 * Resistors:
   * 1x 550 Ohms
   * 1x 4K7 Ohms
@@ -41,7 +42,7 @@ This is the PCB schematic, you can assemble it on breadboard too. I designed the
 
 **Notice that you must connect H Brigde pins accordingly to IN1,IN2,IN3,IN4,ENA,ENB in the schematic.**
 
-**VU must be connected to 5V output of H Brigde.**
+**VU must be connected to 5V output of H Brigde. Connect the GND of the H Brigde and PCB to battery GND. Now connect positive pole of your battery simultaneously to 12V of H Bridge and to VBAT+(*VIN in the schematics*) of the PCB**. (ESTÁ CONFUSO! MELHORAR!)
 
 <img src="https://i.pinimg.com/564x/ae/a5/00/aea500ba31f99047ac2ef4dfd375453d.jpg" height="40%" width="40%">
 
