@@ -36,12 +36,25 @@ This is the PCB schematic, you can assemble it on breadboard too.
 **Notice that you must connect H Brigde pins accordingly to IN1,IN2,IN3,IN4,ENA,ENB in the schematic** 
 <img src="/README/wificar-schematic.PNG" height="75%" width="75%">
 
-## Android App
-[WiFiCar Android App] (WiFiCarMQTT/WiFiCar.apk)
+### Uploading the code to NodeMCU
 
-(Explicar como instalar o app via Android Studio ou linkar APK)
+(Explicar como fazer upload do código e quais dependências instalar!)
+
+### Uploading the code to ESP32CAM
+
+(Explicar como fazer upload do código e quais dependências instalar!)
+
+
+## Android App
+
+You can install the android app downloading this [WiFiCar Android App](WiFiCarMQTT/WiFiCar.apk) or do it from Android Studio. 
+
+### Configuring WiFiCar APP
+
+(Explicar como configurar)
 
 <img src="/README/WiFiCar-settings.jpg" height="75%" width="75%">
 
 ## License
+
 (IMPORTANTE Creative Commons - Ver qual a melhor!)
