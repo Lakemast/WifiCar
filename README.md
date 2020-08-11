@@ -35,7 +35,7 @@ Take a look how it works.
   * 1x 100 nF 25V
   
 ## Assembly
-This is the PCB schematic, you can assemble it on breadboard too. I designed the PCB layout on Altium and all the files are in the [WiFiCar-PCB folder](WifiCar-PCB). Here are the [PCB bottom layer and top overlay](WifiCar-PCB/WifiCar-PCB-TRANSFER) to make the your PCB (*Check out the dimensions with the components before making the PCB because pdf files may cause some distortions*).
+This is the PCB schematic, you can assemble it on breadboard too. I designed the PCB layout on Altium and all the files are in the [WiFiCar-PCB folder](WifiCar-PCB). Here are the [PCB bottom layer and top overlay](WifiCar-PCB/WifiCar-PCB-TRANSFER) to make the your PCB (*Check out if the hardware dimensions before making the PCB because pdf files may cause some distortions*).
 
 <img src="/README/wificar-schematic.PNG" height="75%" width="75%">
 
