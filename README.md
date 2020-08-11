@@ -40,7 +40,7 @@ Take a look how it works.
 ## Assembly
 This is the PCB schematic, you can assemble it on breadboard too. I designed the PCB layout on Altium and all the files are in the [WiFiCar-PCB folder](WifiCar-PCB). Here are the [PCB bottom layer and top overlay](WifiCar-PCB/WifiCar-PCB-TRANSFER) to make the your PCB (*Check out if the hardware dimensions before making the PCB because pdf files may cause some distortions*).
 
-
+<img src="/README/wificar-schematic.PNG" height="75%" width="75%">
 
 **Notice that you must connect H Brigde pins accordingly to IN1,IN2,IN3,IN4,ENA,ENB in the schematic.**
 **VU must be connected to 5V output of H Brigde. Connect the GND of the H Brigde and PCB to battery GND. Now connect positive pole of your battery simultaneously to 12V of H Bridge and to VBAT+**. (Seria bom um diagrama de conexão!)
