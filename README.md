@@ -7,7 +7,9 @@ This is a full implementation of a RC Car over MQTT using:
 
 Take a look how it works.
 
-(IMAGENS E VIDEO DO PROJETO!)
+<img src="/README/WifiCar.png" width="70%" height="70%">
+
+(VIDEO DO PROJETO!)
 
 ## Materials
 * 1x NodeMCU v1.0 ESP 12 E
@@ -16,7 +18,7 @@ Take a look how it works.
 * 1x Micro Servo 9g SG90
 * 1x Ultrasonic Sensor HC-SR04
 * 1x H Brigde L298N
-* 1x 7,4V LiPo Battery
+* 1x 7.4V Battery (*I used a LiPo Battery, but you can also use 2x 18650 3.7V*)
 * 1x Robot chassis with 2 motors
 * Resistors:
   * 1x 550 Ohms
@@ -31,8 +33,8 @@ Take a look how it works.
 ## Assembly
 This is the PCB schematic, you can assemble it on breadboard too.
 
-**Notice that you must connect H Brigde pins to IN1,IN2,IN3,IN4,ENA,ENB in the schematic** 
-<img src="/WifiCar-PCB/wificar-schematic.PNG" height="75%" width="75%">
+**Notice that you must connect H Brigde pins accordingly to IN1,IN2,IN3,IN4,ENA,ENB in the schematic** 
+<img src="/README/wificar-schematic.PNG" height="75%" width="75%">
 
 ## Android App
 (Explicar como instalar o app via Android Studio ou linkar APK)
