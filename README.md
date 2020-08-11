@@ -7,7 +7,7 @@ This is a full implementation of a RC Car over MQTT using:
 
 Take a look how it works.
 
-<img src="/README/WifiCar.png" width="70%" height="70%">
+<img src="/README/WifiCar.png" width="70%" height="45%">
 
 (VIDEO DO PROJETO!)
 
