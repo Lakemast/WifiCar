@@ -1,0 +1,8 @@
+Remove Pin=NodeMCU-1-GND From Net=GND_5
+Remove Pin=P2-14 From Net=GND_5
+Change Component Comment: Designator=R4 Old Comment=Res2 New Comment=3K3
+Change Component Comment: Designator=R3 Old Comment=Res2 New Comment=22K
+Change Component Designator: OldDesignator=REG1 NewDesignator=7805
+Add Pin To Net: Pin=CON1-3 Old Net=VBAT+ New Net=VIN
+Add Pin To Net: Pin=NodeMCU-1-GND Old Net=GND_2 New Net=GND_4
+Add Pin To Net: Pin=P2-14 Old Net=GND_5 New Net=GND_4
