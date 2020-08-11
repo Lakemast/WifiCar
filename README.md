@@ -37,7 +37,11 @@ This is the PCB schematic, you can assemble it on breadboard too.
 <img src="/README/wificar-schematic.PNG" height="75%" width="75%">
 
 ## Android App
+[WiFiCar Android App] (WiFiCarMQTT/app/build/outputs/apk/debug/app-debug.apk)
+
 (Explicar como instalar o app via Android Studio ou linkar APK)
+
+<img src="/README/WiFiCar-settings.jpg" height="75%" width="75%">
 
 ## License
 (IMPORTANTE Creative Commons - Ver qual a melhor!)
