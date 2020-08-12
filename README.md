@@ -69,14 +69,21 @@ You can install the android app downloading this [WiFiCar Android App](WiFiCarMQ
 
 <img src="/README/WiFiCar-settings.jpg" height="75%" width="75%">
 
--**MQTT Broker:** put here your Broker's URL (*[See some Public Brokers here if you dont have your own](https://github.com/mqtt/mqtt.github.io/wiki/public_brokers)*)
--**Username and Password:** fill it if your broker has authentication, if you are using a public broker leave it blank.
--**Publish Topic:**
--**Subscribe Topic:**
--**Speed Left/Right Motor**: used to calibrate straight forward robot movement.
--**Camera URL**: put here your ESP32CAM URL (*remember to add ":81/stream" after the IP address*)
--**Camera Publish Topic:**
--**Camera Subscribe Topic:**
+- **MQTT Broker:** put here your Broker's URL (*[See some Public Brokers here if you dont have your own](https://github.com/mqtt/mqtt.github.io/wiki/public_brokers)*)
+
+- **Username and Password:** fill it if your broker has authentication, if you are using a public broker leave it blank.
+
+- **Publish Topic:**
+
+- **Subscribe Topic:**
+
+- **Speed Left/Right Motor**: used to calibrate straight forward robot movement.
+
+- **Camera URL**: put here your ESP32CAM URL (*remember to add ":81/stream" after the IP address*)
+
+- **Camera Publish Topic:**
+
+- **Camera Subscribe Topic:**
 
 
 ## License
