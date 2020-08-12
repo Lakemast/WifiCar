@@ -19,7 +19,7 @@ Take a look how it works.
 * 1x Micro Servo 9g SG90
 * 1x Ultrasonic Sensor HC-SR04
 * 1x H Brigde L298N
-* 1x 7.4V Battery (*I used a LiPo Battery, but you can also use 2x 18650 3.7V*)
+* 1x 7.4V Battery (*I used a LiPo Battery, but you can also use 2x 18650 3.7V or a maximum battery voltage of 25V, see the section Using a battery over 7.4V and under 25V*)
 * 1x Robot chassis with 2 motors
 * 3x 0.100" (2.54 mm) Breakaway Male Header: 1×40-Pin
 * 3x  0.100" (2.54 mm) Breakaway Female Header: 1×40-Pin
@@ -50,6 +50,10 @@ This is the PCB schematic, you can assemble it on breadboard too. I designed the
 VU must be connected to 5V output of H Brigde. Connect the GND of the H Brigde and PCB to battery GND. Now connect the positive pole of your battery simultaneously to 12V of H Bridge and to VBAT+ (*See Diagram below*).
 
 <img src="/README/ConnectionSchemt.png" height="40%" width="40%">
+
+### Using a battery over 7.4V and under 25V
+
+
 
 ### Uploading the code to NodeMCU
 
