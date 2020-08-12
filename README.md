@@ -38,7 +38,7 @@ Take a look how it works.
   * 1x 100 nF 25V
   
 ## Assembly
-This is the PCB schematic, you can assemble it on breadboard too. I designed the PCB layout on Altium and all the files are in the [WiFiCar-PCB folder](WifiCar-PCB). Here are the [PCB bottom layer and top overlay](WifiCar-PCB/WifiCar-PCB-TRANSFER) to make the your PCB (*Check out if the hardware dimensions before making the PCB because pdf files may cause some distortions*).
+This is the PCB schematic, you can assemble it on breadboard too. I designed the PCB layout on Altium and all the files are in the [WiFiCar-PCB folder](WifiCar-PCB). Here are the [PCB bottom layer and top overlay](WifiCar-PCB/WifiCar-PCB-TRANSFER) to make your PCB (*Check out if the hardware dimensions before making the PCB because pdf files may cause some distortions*).
 
 <img src="/README/wificar-schematic_revised.PNG" height="75%" width="75%"> (PCB Schematic)
 
@@ -67,23 +67,28 @@ You can install the android app downloading this [WiFiCar Android App](WiFiCarMQ
 
 ### Configuring WiFiCar APP and WiFiCar Robot
 
+First configure your WiFiCar APP. You may change MQTT topics, if you want. It's highly recommended change theses MQTT topics when using Public Broker to avoid same applications using the same topic. When changing topic, you must change the topics in NodeMCU and ESP32CAM (Don't forget that!).
+
 <img src="/README/WiFiCar-settings.jpg" height="75%" width="75%">
 
-- **MQTT Broker:** put here your Broker's URL (*[See some Public Brokers here if you dont have your own](https://github.com/mqtt/mqtt.github.io/wiki/public_brokers)*)
+- **MQTT Broker:** put here your Broker's URL (*[See some Public Brokers here if you dont have your own](https://github.com/mqtt/mqtt.github.io/wiki/public_brokers)*).
 
 - **Username and Password:** fill it if your broker has authentication, if you are using a public broker leave it blank.
 
-- **Publish Topic:**
+- **Publish Topic:** MQTT topic which WiFiCar App will post commands to controll the WiFiCar Robot.
 
-- **Subscribe Topic:**
+- **Subscribe Topic:** MQTT topic which App will receive data from WiFiCar Robot.
 
 - **Speed Left/Right Motor**: used to calibrate straight forward robot movement.
 
-- **Camera URL**: put here your ESP32CAM URL (*remember to add ":81/stream" after the IP address*)
+- **Camera URL**: put here your ESP32CAM URL (*remember to add ":81/stream" after the IP address*).
 
-- **Camera Publish Topic:**
+- **Camera Publish Topic:** MQTT topic which WiFiCar App will post commands to ESP32CAM and the servor motor.
 
-- **Camera Subscribe Topic:**
+- **Camera Subscribe Topic:** MQTT topic which WiFiCar App will receive data from WiFiCar ESP32CAM.
+
+
+Done that configure 
 
 
 ## License
