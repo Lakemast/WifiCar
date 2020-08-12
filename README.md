@@ -68,7 +68,7 @@ You can install the android app downloading this [WiFiCar Android App](WiFiCarMQ
 
 ## Configuring WiFiCar APP and WiFiCar Robot
 
-First configure your WiFiCar APP. You may change MQTT topics, if you want. It's highly recommended change theses MQTT topics when using Public Broker to avoid same applications using the same topic. **When changing topic, you must change the topics in NodeMCU and ESP32CAM, Don't forget that!**
+First configure your WiFiCar APP. You may change MQTT topics, if you want. It's highly recommended change theses MQTT topics when using Public Broker to avoid different applications using the same topic. **When changing topic, you must change the topics in NodeMCU and ESP32CAM, Don't forget that!**
 
 <img src="/README/WiFiCar-settings.jpg" height="75%" width="75%">
 
