@@ -46,9 +46,9 @@ This is the PCB schematic, you can assemble it on breadboard too. I designed the
 
 <img src="https://i.pinimg.com/564x/ae/a5/00/aea500ba31f99047ac2ef4dfd375453d.jpg" height="40%" width="40%"> (L298N H Bridge driver pinout)
 
-<img src="/README/ConnectionSchemt.png" height="40%" width="40%">
-
 **VU must be connected to 5V output of H Brigde. Connect the GND of the H Brigde and PCB to battery GND. Now connect positive pole of your battery simultaneously to 12V of H Bridge and to VBAT+ (*See Diagram below*)**.
+
+<img src="/README/ConnectionSchemt.png" height="40%" width="40%">
 
 ### Uploading the code to NodeMCU
 
