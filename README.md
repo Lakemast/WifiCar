@@ -66,7 +66,7 @@ You can install the android app downloading this [WiFiCar Android App](WiFiCarMQ
 
 **Remember you need to activate developer mode in your android smartphone!**
 
-## Configuring WiFiCar APP and WiFiCar Robot
+## Configuring WiFiCar APP
 
 First configure your WiFiCar APP. You may change MQTT topics, if you want. It's highly recommended change theses MQTT topics when using Public Broker to avoid different applications using the same topic. **When changing topic, you must change the topics in NodeMCU and ESP32CAM, Don't forget that!**
 
@@ -88,7 +88,9 @@ First configure your WiFiCar APP. You may change MQTT topics, if you want. It's 
 
 - **Camera Subscribe Topic:** MQTT topic which WiFiCar App will receive data from WiFiCar ESP32CAM.
 
-There are two ways to change MQTT Topics in NodeMCU and ESP32CAM. It can be done changing source code or you can change via HTTP web page.
+## Configuring WiFiCar Robot
+
+There are two ways **to change MQTT Topics in NodeMCU and ESP32CAM**. It can be done changing source code or you can change via HTTP web page.
 ~~The only way to change topics permantly is via source code, if you change it using the HTTP web page when you reboot your robot the topics will be reset to the source code default.~~
 
 
