@@ -66,9 +66,9 @@ where:
 * VBAT+ is the voltage of your battery at full charge. Must be under 25V to not damage 7805 voltage regulator at PCB.
 * R3 and R4 are the resistors in the PCB Schematic. Choose a value to R4 then calculate R3 value. Remember there is no problem using a resistor with a approximate resistance value.
 
-### Uploading the code to ESP8266 device
+### Uploading the code to NodeMCU
 
-[Follow this to upload the code to your ESP8266 device](https://randomnerdtutorials.com/how-to-install-esp8266-board-arduino-ide/). Remember you will upload the code on the [WiFiCarESP folder](/WiFiCarESP).
+[Follow this to upload the code to your NodeMCU](https://randomnerdtutorials.com/how-to-install-esp8266-board-arduino-ide/). Remember you will upload the code on the [WiFiCarESP folder](/WiFiCarESP).
 
 ### Uploading the code to ESP32CAM
 
