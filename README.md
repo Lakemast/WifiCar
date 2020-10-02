@@ -145,7 +145,7 @@ Now you will change this values:
 
 ## Repositories I used
 
-Thanks to these repositories I was able to do it.
+Thanks to these repositories I achieve it.
 
 - [esp8266/Arduino](https://github.com/esp8266/Arduino)
 - [tzapu/WiFiManager](https://github.com/tzapu/WiFiManager)
