@@ -119,7 +119,7 @@ WiFiManagerParameter custom_publish_topic("publishTopic", "Status Topic", "wific
 WiFiManagerParameter custom_subscribe_topic_cam("subscribeTopicCam", " Control Camera Topic", "wificar/cam/control", 40, " readonly");
 
 ```
-Now you will change this values:
+Now you will change these values:
 
 - Replace **broker.hivemq.com** with your broker URL.
 - Replace **wificar/control** with the chosen topic to control the robot movement.
@@ -137,7 +137,7 @@ WiFiManagerParameter custom_publish_topic("publishTopic", "Publish Topic", "wifi
 
 ```
 
-Now you will change this values:
+Now you will change these values:
 
 - Replace **broker.hivemq.com** with your broker URL.
 - Replace **wificar/cam/control** with the chosen topic to control ESP32CAM LED. **This topic must be the same at ESP8266**
