@@ -108,7 +108,7 @@ First configure your WiFiCar APP. You may change MQTT topics, if you want. It's 
 There are two ways **to change MQTT Broker URL and MQTT Topics in NodeMCU and ESP32CAM**. It can be done changing source code or you can change via HTTP web page.
 
 
-Search for this code in [WiFiCarESP.ino](WifiCarESP/WifiCarESP.ino)to change ESP8266 MQTT Broker URL and Topics. (**THIS IS OPTIONAL, DO IT ONLY IF YOU NEED**)
+Search for this code in [WiFiCarESP.ino](WifiCarESP/WifiCarESP.ino) to change ESP8266 MQTT Broker URL and Topics. (**THIS IS OPTIONAL, DO IT ONLY IF YOU NEED**)
 
 ```C
 
