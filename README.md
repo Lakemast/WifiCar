@@ -60,7 +60,7 @@ To calculate their values you will need to use the voltage divider formula to pr
 
 <img src="/README/voltagedivider.PNG" height="35%" width="35%">
 
-where is:
+where:
 
 * VA0 is the voltage at A0 analog input of NodeMCU. This voltage must be 1V.
 * VBAT+ is the voltage of your battery at full charge. Must be under 25V to not damage 7805 voltage regulator at PCB.
