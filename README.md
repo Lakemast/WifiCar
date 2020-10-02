@@ -55,15 +55,16 @@ VU must be connected to 5V output of H Brigde. Connect the GND of the H Brigde a
 ### Using a battery over 7.4V and under 25V
 
 If you will use a battery over 7.4V you will need to change the resistors R3 and R4. [Look the PCB Schematic](/README/wificar-schematic_revised.PNG)
-To calculate their values you will need to use the voltage divider formula to provide the analago input A0 of NodeMCU 1V when the batterry is at full charge.[Take a look at this voltage divider calculator](https://ohmslawcalculator.com/voltage-divider-calculator) or you can calcultate yourself, here it is the formula: 
+To calculate their values you will need to use the voltage divider formula to provide the analago input A0 of NodeMCU 1V when the batterry is at full charge. 
+[Take a look at this voltage divider calculator](https://ohmslawcalculator.com/voltage-divider-calculator) or you can calcultate yourself, here it is the formula: 
 
+<img src="/README/voltagedivider.PNG" height="35%" width="35%">
 
-<img src="/README/voltagedivider.PNG "height="40%" width="40%">
+where is:
 
-	where is:
-		- VA0 is the voltage at A0 analog input of NodeMCU. This voltage must be 1V.
-		- VBAT+ is the voltage of your battery at full charge. Must be under 25V to not damage 7805 voltage regulator at PCB.
-		- R3 and R4 are the resistors in the PCB Schematic. Choose a value to R4 then calculate R3 value. Remember there is no problem using a resistor with a approximate resistance value.
+* VA0 is the voltage at A0 analog input of NodeMCU. This voltage must be 1V.
+* VBAT+ is the voltage of your battery at full charge. Must be under 25V to not damage 7805 voltage regulator at PCB.
+* R3 and R4 are the resistors in the PCB Schematic. Choose a value to R4 then calculate R3 value. Remember there is no problem using a resistor with a approximate resistance value.
 
 ### Uploading the code to NodeMCU
 
