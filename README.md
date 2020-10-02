@@ -40,7 +40,7 @@ This is a full implementation of a RC Car over MQTT using:
   * 1x 100 nF 25V
   
 ## Assembly
-This is the PCB schematic, you can assemble it on breadboard too. I designed the PCB layout on Altium and all the files are in the [WiFiCar-PCB folder](WifiCar-PCB). Here are the [PCB bottom layer and top overlay](WifiCar-PCB/WifiCar-PCB-TRANSFER) to make your PCB (*Check out if the hardware dimensions before making the PCB because pdf files may cause some distortions*).
+This is the PCB schematic, you can assemble it on breadboard too. I designed the PCB layout and all the files are in the [WiFiCar-PCB folder](WifiCar-PCB). Here are the [PCB bottom layer and top overlay](WifiCar-PCB/WifiCar-PCB-TRANSFER) to make your PCB (*Check out if the hardware dimensions before making the PCB because pdf files may cause some distortions*).
 
 <img src="/README/wificar-schematic_revised.PNG" height="75%" width="75%"> (PCB Schematic)
 
@@ -152,7 +152,6 @@ Thanks to these repositories I achieve it.
 - [perthcpe23/android-mjpeg-view](https://github.com/perthcpe23/android-mjpeg-view)
 - [controlwear/virtual-joystick-android](https://github.com/controlwear/virtual-joystick-android)
 - [internetofhomethings/MQTT-Android-Demo-App](https://github.com/internetofhomethings/MQTT-Android-Demo-App)
-- [fatum2996/altium-library](https://github.com/fatum2996/altium-library)
 
 ## License
 WiFiCar by Lakemast is licensed under the [Creative Commons - Attribution - Non-Commercial - Share Alikelicense](https://creativecommons.org/licenses/by-nc-sa/4.0/).
