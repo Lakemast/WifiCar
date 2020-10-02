@@ -1,9 +1,6 @@
 # WiFiCar
 
-This is a full implementation of a RC Car over MQTT using:
-- ESP8266 (NodeMCU v1.0)
-- ESP32CAM
-- Android App
+Now you will be able to build and control your own RC Car over the Internet using the Message Queue Telemetry Transport Protocol (MQTT) with an easy and intuitive control interface on WAN (Wide Area Network) and LAN (Local Area Network) (__but the camera stream may require some workaround__) using any two motors robot chassis.
 
 [Click here to see WiFiCar Video on YouTube](https://youtu.be/1mkALsdsVI4)
 
