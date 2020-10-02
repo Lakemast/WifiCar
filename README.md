@@ -66,13 +66,13 @@ where:
 * VBAT+ is the voltage of your battery at full charge. Must be under 25V to not damage 7805 voltage regulator at PCB.
 * R3 and R4 are the resistors in the PCB Schematic. Choose a value to R4 then calculate R3 value. Remember there is no problem using a resistor with a approximate resistance value.
 
-### Uploading the code to NodeMCU
+### Uploading the code to ESP8266 device
 
-(Explicar como fazer upload do código e quais dependências instalar!)
+[Follow this to upload the code to your ESP8266 device](https://randomnerdtutorials.com/how-to-install-esp8266-board-arduino-ide/). Remember you will upload the code on the [WiFiCarESP folder](/WiFiCarESP).
 
 ### Uploading the code to ESP32CAM
 
-(Explicar como fazer upload do código e quais dependências instalar!)
+[Take a look at this if you dont know how to upload the code to ESP32CAM](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). Follow the steps: 1. Install the ESP32 add-on and 3. ESP32-CAM Upload Code of this tutorial. Instead uploading the example code you will compile and upload the code on [WiFiCamCar folder](/WiFiCamCar).
 
 
 ## Android App
@@ -105,8 +105,43 @@ First configure your WiFiCar APP. You may change MQTT topics, if you want. It's 
 
 ## Configuring WiFiCar Robot
 
-There are two ways **to change MQTT Topics in NodeMCU and ESP32CAM**. It can be done changing source code or you can change via HTTP web page.
-The only way to change topics permantly is via source code, if you change it using the HTTP web page when you reboot your robot the topics will be reset to the source code default.
+There are two ways **to change MQTT Broker URL and MQTT Topics in NodeMCU and ESP32CAM**. It can be done changing source code or you can change via HTTP web page.
+
+
+Search for this code in [WiFiCarESP.ino](WifiCarESP/WifiCarESP.ino)to change ESP8266 MQTT Broker URL and Topics. (**THIS IS OPTIONAL, DO IT ONLY IF YOU NEED**)
+
+```C
+
+//custom parameters
+WiFiManagerParameter custom_mqtt_server("server", "MQTT Broker", "broker.hivemq.com", 40, " readonly");
+WiFiManagerParameter custom_subscribe_topic("subscribeTopic", "Control Topic", "wificar/control", 40, " readonly");
+WiFiManagerParameter custom_publish_topic("publishTopic", "Status Topic", "wificar/status", 40, " readonly");
+WiFiManagerParameter custom_subscribe_topic_cam("subscribeTopicCam", " Control Camera Topic", "wificar/cam/control", 40, " readonly");
+
+```
+Now you will change this values:
+
+- Replace **broker.hivemq.com** with your broker URL.
+- Replace **wificar/control** with the chosen topic to control the robot movement.
+- Replace **wificar/status** with the chosen topic to receive robot status messages.
+- Replace **wificar/cam/control** with the chosen topic to rotate camera. **This topic must be the same at ESP32CAM**
+
+
+Search for this code in [WiFiCamCar.ino](WiFiCamCar/WiFiCamCar.ino) to change ESP32CAM MQTT Broker URL and Topics.(**THIS IS OPTIONAL, DO IT ONLY IF YOU NEED**)
+
+```C
+
+WiFiManagerParameter custom_mqtt_server("server", "MQTT Broker", "broker.hivemq.com", 40, " readonly");
+WiFiManagerParameter custom_led_subscribe_topic("subscribeTopic", "Subscribe Topic", "wificar/cam/control", 40, " readonly");
+WiFiManagerParameter custom_publish_topic("publishTopic", "Publish Topic", "wificar/cam/status", 40, " readonly");
+
+```
+
+Now you will change this values:
+
+- Replace **broker.hivemq.com** with your broker URL.
+- Replace **wificar/cam/control** with the chosen topic to control ESP32CAM LED. **This topic must be the same at ESP8266**
+- Replace **wificar/cam/status** with the topic chosen to receive the ESP32CAM LED status.
 
 ## Repositories I used
 
