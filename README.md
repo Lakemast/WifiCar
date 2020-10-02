@@ -152,6 +152,7 @@ Thanks to these repositories I achieve it.
 - [perthcpe23/android-mjpeg-view](https://github.com/perthcpe23/android-mjpeg-view)
 - [controlwear/virtual-joystick-android](https://github.com/controlwear/virtual-joystick-android)
 - [internetofhomethings/MQTT-Android-Demo-App](https://github.com/internetofhomethings/MQTT-Android-Demo-App)
+- [fatum2996/altium-library] (https://github.com/fatum2996/altium-library)
 
 ## License
 WiFiCar by Lakemast is licensed under the [Creative Commons - Attribution - Non-Commercial - Share Alikelicense](https://creativecommons.org/licenses/by-nc-sa/4.0/).
