@@ -5,11 +5,12 @@ This is a full implementation of a RC Car over MQTT using:
 - ESP32CAM
 - Android App
 
-Take a look how it works.
+[Click here to see WiFiCar Video on YouTube](https://youtu.be/1mkALsdsVI4)
 
-<img src="/README/WifiCar.png" width="70%" height="45%">
 
-(VIDEO DO PROJETO!)
+<img src="/README/wificar.gif" width="70%" height="45%">
+
+<img src="/README/WifiCar.png" width="70%" height="35%">
 
 ## Materials
 
