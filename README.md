@@ -96,8 +96,16 @@ First configure your WiFiCar APP. You may change MQTT topics, if you want. It's 
 ## Configuring WiFiCar Robot
 
 There are two ways **to change MQTT Topics in NodeMCU and ESP32CAM**. It can be done changing source code or you can change via HTTP web page.
-~~The only way to change topics permantly is via source code, if you change it using the HTTP web page when you reboot your robot the topics will be reset to the source code default.~~
+The only way to change topics permantly is via source code, if you change it using the HTTP web page when you reboot your robot the topics will be reset to the source code default.
 
+## Repositories I used
+
+- [esp8266/Arduino](https://github.com/esp8266/Arduino)
+- [tzapu/WiFiManager](https://github.com/tzapu/WiFiManager)
+- [perthcpe23/android-mjpeg-view](https://github.com/perthcpe23/android-mjpeg-view)
+- [controlwear/virtual-joystick-android](https://github.com/controlwear/virtual-joystick-android)
+- [internetofhomethings/MQTT-Android-Demo-App](https://github.com/internetofhomethings/MQTT-Android-Demo-App)
+- [fatum2996/altium-library](https://github.com/fatum2996/altium-library)
 
 ## License
 WiFiCar by Lakemast is licensed under the [Creative Commons - Attribution - Non-Commercial - Share Alikelicense](https://creativecommons.org/licenses/by-nc-sa/4.0/).
