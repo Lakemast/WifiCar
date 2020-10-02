@@ -127,7 +127,7 @@ Now you will change this values:
 - Replace **wificar/cam/control** with the chosen topic to rotate camera. **This topic must be the same at ESP32CAM**
 
 
-Search for this code in [WiFiCamCar.ino](WiFiCamCar/WiFiCamCar.ino) to change ESP32CAM MQTT Broker URL and Topics.(**THIS IS OPTIONAL, DO IT ONLY IF YOU NEED**)
+Search for this code in [WiFiCamCar.ino](WiFiCamCar/WiFiCamCar.ino) to change ESP32CAM MQTT Broker URL and Topics. (**THIS IS OPTIONAL, DO IT ONLY IF YOU NEED**)
 
 ```C
 
