@@ -51,7 +51,7 @@ VU must be connected to 5V output of H Brigde. Connect the GND of the H Brigde a
 
 ### Using a battery over 7.4V and under 25V
 
-If you will use a battery over 7.4V you will need to change the resistors R3 and R4. [Look the PCB Schematic](/README/wificar-schematic_revised.PNG)
+If you will use a battery over 7.4V, you will need to change the resistors R3 and R4. [Look the PCB Schematic](/README/wificar-schematic_revised.PNG)
 To calculate their values you will need to use the voltage divider formula to provide the analago input A0 of NodeMCU 1V when the batterry is at full charge. 
 [Take a look at this voltage divider calculator](https://ohmslawcalculator.com/voltage-divider-calculator) or you can calcultate yourself, here it is the formula: 
 
