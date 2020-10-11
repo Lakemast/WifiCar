@@ -60,7 +60,7 @@ To calculate their values you will need to use the voltage divider formula to pr
 where:
 
 * VA0 is the voltage at A0 analog input of NodeMCU. This voltage must be 1V.
-* VBAT+ is the voltage of your battery at full charge. Must be under 25V to not damage 7805 voltage regulator at PCB.
+* VBAT+ is the voltage of your battery at full charge. Must be under 25V not to damage 7805 voltage regulator at PCB.
 * R3 and R4 are the resistors in the PCB Schematic. Choose a value to R4 then calculate R3 value. Remember there is no problem using a resistor with a approximate resistance value.
 
 ### Uploading the code to NodeMCU
@@ -80,7 +80,7 @@ You can install the android app downloading this [WiFiCar Android App](WiFiCarMQ
 
 ## Configuring WiFiCar APP
 
-First configure your WiFiCar APP. You may change MQTT topics, if you want. It's highly recommended change theses MQTT topics when using Public Broker to avoid different applications using the same topic. **When changing topic, you must change the topics in NodeMCU and ESP32CAM, Don't forget that!**
+First configure your WiFiCar APP. You may change MQTT topics, if you want. It's highly recommended changing these MQTT topics when using Public Broker to avoid different applications using the same topic. **When changing topic, you must change the topics in NodeMCU and ESP32CAM, Don't forget that!**
 
 <img src="/README/WiFiCar-settings.jpg" height="75%" width="75%">
 
