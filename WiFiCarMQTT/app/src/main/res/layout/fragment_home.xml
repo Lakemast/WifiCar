@@ -141,11 +141,13 @@
 
     <com.longdo.mjpegviewer.MjpegView
         android:id="@+id/mjpegview"
-        android:layout_width="270dp"
+        android:layout_width="430dp"
         android:layout_height="250dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintStart_toEndOf="@+id/joystickViewDirection" />
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/status_textView3"
+        app:layout_constraintStart_toEndOf="@+id/joystickViewDirection"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -154,6 +156,7 @@
         android:layout_marginBottom="4dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/brakeButton"
         app:layout_constraintStart_toEndOf="@+id/joystickViewDirection">
 
         <ImageButton

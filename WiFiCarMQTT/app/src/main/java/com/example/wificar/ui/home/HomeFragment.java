@@ -200,12 +200,12 @@ public class HomeFragment extends Fragment {
                     JSONObject recievedJSON = new JSONObject(message.toString());
                     // get employee name and salary
                     double battery_double = Double.valueOf(recievedJSON.getString("voltage"));
-                    battery_double = (((battery_double - 5.8) / 1.7) * 100);
-                    battery_double = (double) Math.round(battery_double * 100) / 100;
-                    if (battery_double < 0) battery_double = 0;
-                    if (battery_double > 100) battery_double = 100;
-                    batteryTextView.setText(battery_double + "%");
-                    if (battery_double < 35)
+                    //battery_double = (((battery_double - 5.8) / 1.7) * 100);
+                    //battery_double = (double) Math.round(battery_double * 100) / 100;
+                    //if (battery_double < 0) battery_double = 0;
+                    //if (battery_double > 100) battery_double = 100;
+                    batteryTextView.setText(battery_double + "V");
+                    if (battery_double < 5)
                         batteryTextView.setTextColor(Color.RED);
                     else
                         batteryTextView.setTextColor(Color.GREEN);
