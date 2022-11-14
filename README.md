@@ -150,6 +150,7 @@ Thanks to these repositories I achieved it.
 - [controlwear/virtual-joystick-android](https://github.com/controlwear/virtual-joystick-android)
 - [internetofhomethings/MQTT-Android-Demo-App](https://github.com/internetofhomethings/MQTT-Android-Demo-App)
 - [fatum2996/altium-library](https://github.com/fatum2996/altium-library)
+- [ivanseidel/ArduinoThread](https://github.com/ivanseidel/ArduinoThread)
 
 ## License
 WiFiCar by Lakemast is licensed under the [Creative Commons - Attribution - Non-Commercial - Share Alikelicense](https://creativecommons.org/licenses/by-nc-sa/4.0/).
