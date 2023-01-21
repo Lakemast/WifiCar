@@ -49,7 +49,11 @@ void callback(char *topic, byte *payload, unsigned int length) {
     payloadInterpreter(payloadStr);
     Serial.println(payloadStr);
   }
-  else if (topicStr.equals(MQTT_CONTROL_CAMERA_SERVO)) if (payloadStr != "ON" && payloadStr != "OFF") moveServo (payloadStr.toInt());
+  else if (topicStr.equals(MQTT_CONTROL_CAMERA_SERVO)) if (payloadStr != "ON" && payloadStr != "OFF"){
+    if(pos == payloadStr.toInt()) return;
+    pos = payloadStr.toInt();
+    moveServo (pos);
+  }
 }
 
 

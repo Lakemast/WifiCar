@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:background="@mipmap/backgroundapp">
 
+    <com.longdo.mjpegviewer.MjpegView
+        android:id="@+id/mjpegview"
+        android:layout_width="430dp"
+        android:layout_height="250dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/status_textView3"
+        app:layout_constraintStart_toEndOf="@+id/joystickViewDirection"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/status_textView4"
         android:layout_width="wrap_content"
@@ -138,16 +148,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-    <com.longdo.mjpegviewer.MjpegView
-        android:id="@+id/mjpegview"
-        android:layout_width="430dp"
-        android:layout_height="250dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/status_textView3"
-        app:layout_constraintStart_toEndOf="@+id/joystickViewDirection"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

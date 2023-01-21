@@ -1,7 +1,10 @@
 void moveServo (int pos) {
+  ultrasonicServo.attach(D8);
   Serial.print("pos=");
   Serial.println(pos);
   ultrasonicServo.write(pos);
+  delay(100);
+  ultrasonicServo.detach();
   return;
 }
 
