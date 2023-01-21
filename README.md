@@ -1,6 +1,6 @@
 # WiFiCar
 
-Now you will be able to build and control your own RC Car over the Internet using the Message Queue Telemetry Transport Protocol (MQTT) with an easy and intuitive control interface on WAN (Wide Area Network) and LAN (Local Area Network) (*but the camera streaming may require some workaround*) using any two motors robot chassis.
+Now you will be able to build and control your own RC Car over the Internet using the Message Queue Telemetry Transport Protocol (MQTT) with an easy and intuitive control interface on LAN (Local Area Network) and WAN (Wide Area Network) (**but WAN Camera Stream may require some workaround**) using any two motors robot chassis.
 
 [Click here to see WiFiCar Video on YouTube](https://youtu.be/1mkALsdsVI4)
 
