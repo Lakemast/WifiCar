@@ -78,14 +78,14 @@ To calculate their values you will need to use the voltage divider formula to pr
 </p>-->
 
 <p align="center">
-$\Huge R_3=(\frac{V_{BAT+}}{V_{A0}}*R_4)-R_4$
+$\LARGE R_3=(\frac{V_{BAT+}}{V_{A0}}*R_4)-R_4$
 </p>
 
 where:
 
-* VA0 is the voltage at A0 analog input of NodeMCU. This voltage must be 1V.
-* VBAT+ is the voltage of your battery at full charge. Must be under 25V not to damage 7805 voltage regulator at PCB.
-* R3 and R4 are the resistors in the PCB Schematic. Choose a value to R4 then calculate R3 value. Remember there is no problem using a resistor with a approximate resistance value.
+* $\Large V_{A0}$ is the voltage at A0 analog input of NodeMCU. This voltage must be 1V.
+* $\Large V_{BAT+}$ is the voltage of your battery at full charge. Must be under 25V not to damage 7805 voltage regulator at PCB.
+* $\Large R_3$ and $\Large R_4$ are the resistors in the PCB Schematic. Choose a value to $\Large R_4$ then calculate $\Large R_3$ value. Remember there is no problem using a resistor with a approximate resistance value.
 
 ### Uploading the code to NodeMCU
 
