@@ -4,10 +4,11 @@ Now you will be able to build and control your own RC Car over the Internet usin
 
 [Click here to see WiFiCar Video on YouTube](https://youtu.be/1mkALsdsVI4)
 
-
-<img align="center" src="/README/wificar.gif" width="70%" height="45%">
+<p align="center">
+<img src="/README/wificar.gif" width="70%" height="45%">
 
 <img align="center" src="/README/WifiCar.png" width="70%" height="35%">
+</p>
 
 ## Materials
 
@@ -47,7 +48,9 @@ This is the PCB schematic, you can assemble it on breadboard too. I designed the
 
 VU must be connected to 5V output of H Brigde. Connect the GND of the H Brigde and PCB to battery GND. Now connect the positive pole of your battery simultaneously to 12V of H Bridge and to VBAT+ (*See Diagram below*).
 
+<p align="center">
 <img src="/README/ConnectionSchemt.png" height="40%" width="40%">
+</p>
 
 ### Using a battery over 7.4V and under 25V
 
@@ -55,8 +58,9 @@ If you will use a battery over 7.4V, you will need to change the resistors R3 an
 To calculate their values you will need to use the voltage divider formula to provide the analago input A0 of NodeMCU 1V when the batterry is at full charge. 
 [Take a look at this voltage divider calculator](https://ohmslawcalculator.com/voltage-divider-calculator) or you can calcultate yourself, here it is the formula: 
 
+<p align="center">
 <img src="/README/voltagedivider.PNG" height="35%" width="35%">
-
+</p>
 where:
 
 * VA0 is the voltage at A0 analog input of NodeMCU. This voltage must be 1V.
@@ -82,7 +86,9 @@ You can install the android app downloading this [WiFiCar Android App](WiFiCarMQ
 
 First configure your WiFiCar APP. You may change MQTT topics, if you want. It's highly recommended changing these MQTT topics when using Public Broker to avoid different applications using the same topic. **When changing topic, you must change the topics in NodeMCU and ESP32CAM, Don't forget that!**
 
+<p align="center">
 <img src="/README/WiFiCar-settings.jpg" height="75%" width="75%">
+</p>
 
 - **MQTT Broker:** put here your Broker's URL (*[See some Public Brokers here if you dont have your own](https://github.com/mqtt/mqtt.github.io/wiki/public_brokers)*).
 
