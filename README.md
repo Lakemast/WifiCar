@@ -5,9 +5,9 @@ Now you will be able to build and control your own RC Car over the Internet usin
 [Click here to see WiFiCar Video on YouTube](https://youtu.be/1mkALsdsVI4)
 
 
-<img src="/README/wificar.gif" width="70%" height="45%">
+<img align="center" src="/README/wificar.gif" width="70%" height="45%">
 
-<img src="/README/WifiCar.png" width="70%" height="35%">
+<img align="center" src="/README/WifiCar.png" width="70%" height="35%">
 
 ## Materials
 
